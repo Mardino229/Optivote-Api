@@ -1,0 +1,1176 @@
+{
+    "variable": [
+        {
+            "id": "baseUrl",
+            "key": "baseUrl",
+            "type": "string",
+            "name": "string",
+            "value": "http:\/\/localhost"
+        }
+    ],
+    "info": {
+        "name": "Laravel",
+        "_postman_id": "f6439198-1c68-40f4-8147-f8dd1f505a5e",
+        "description": "",
+        "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
+    },
+    "item": [
+        {
+            "name": "Authentication",
+            "description": "",
+            "item": [
+                {
+                    "name": "Create a new user account.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/register",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/register"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"npi\":123456789,\"email\":\"user@example.com\",\"password\":\".B%LFVr\\\\pl\"}"
+                        },
+                        "description": "This endpoint allows users to create a new account.\nThe user must provide their NPI, email, and password.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n  \"success\": true,\n  \"message\": \"Compte cr\u00e9er avec succ\u00e8s\",\n  \"body\": \"\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n  \"success\": false,\n  \"message\": \"Npi incorrect.\",\n  \"body\": \"\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 406,
+                            "body": "{\n  \"success\": false,\n  \"message\": \"L'utilisateur existe d\u00e9j\u00e0\",\n  \"body\": \"\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Log in a user.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/login",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/login"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"email\":\"user@example.com\",\"password\":\"CRo,p;btgiXM#7p~BeU\"}"
+                        },
+                        "description": "This endpoint allows a user to log in with their email and password.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"success\": true,\n  \"message\": \"Connexion r\u00e9ussie\",\n  \"body\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\n  \"success\": false,\n  \"message\": \"Identifiants incorrects\",\n  \"body\": \"\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Log out a user.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/logout",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/logout"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"npi\":115586654}"
+                        },
+                        "description": "This endpoint logs out the authenticated user and deletes their tokens.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n  \"success\": true,\n  \"message\": \"D\u00e9connexion r\u00e9ussie\",\n  \"body\": \"\"\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Candidates",
+            "description": "",
+            "item": [
+                {
+                    "name": "List all candidates for an election.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/candidats\/:election_id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/candidats\/:election_id",
+                            "variable": [
+                                {
+                                    "id": "election_id",
+                                    "key": "election_id",
+                                    "value": "1",
+                                    "description": "The ID of the election."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "This endpoint retrieves all candidates for a specific election.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"success\": true,\n  \"message\": \"\",\n  \"body\": [\n    {\n      \"id\": 1,\n      \"name\": \"John Doe\",\n      \"npi\": \"123456789\",\n      \"election_id\": 1,\n      \"description\": \"Une description du candidat\",\n      \"photo\": \"candidats\/photos\/johndoe.jpg\"\n    }\n  ]\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"success\": false,\n  \"message\": \"Election introuvable\",\n  \"body\": null\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Retrieve a specific candidate.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/candidat\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/candidat\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "The ID of the candidate."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "This endpoint retrieves the details of a specific candidate by ID.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"success\": true,\n  \"message\": \"\",\n  \"body\": {\n    \"id\": 1,\n    \"name\": \"John Doe\",\n    \"npi\": \"123456789\",\n    \"election_id\": 1,\n    \"photo\": \"candidats\/photos\/johndoe.jpg\"\n  }\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n  \"success\": false,\n  \"message\": \"Candidat introuvable\",\n  \"body\": null\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Update a candidate.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/candidat\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/candidat\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "The ID of the candidate to update."
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "multipart\/form-data"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "npi",
+                                    "value": "123456789",
+                                    "type": "text",
+                                    "description": "The unique NPI identifier of the candidate."
+                                },
+                                {
+                                    "key": "election_id",
+                                    "value": 1,
+                                    "type": "text",
+                                    "description": "The ID of the election."
+                                },
+                                {
+                                    "key": "description",
+                                    "value": "Une bonne description",
+                                    "type": "text",
+                                    "description": "The name of the candidate."
+                                },
+                                {
+                                    "key": "name",
+                                    "value": "John Doe",
+                                    "type": "text",
+                                    "description": "The name of the candidate."
+                                },
+                                {
+                                    "key": "image",
+                                    "src": [],
+                                    "type": "file"
+                                },
+                                {
+                                    "key": "photo",
+                                    "src": [],
+                                    "type": "file"
+                                }
+                            ]
+                        },
+                        "description": "This endpoint allows updating the details of a specific candidate. Changes cannot be made after the election's start date.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"success\": true,\n  \"message\": \"Candidat mis \u00e0 jour avec succ\u00e8s\",\n  \"body\": {\n    \"id\": 1,\n    \"name\": \"John Doe\",\n    \"description\": \"Une bonne description\",\n    \"npi\": \"123456789\",\n    \"election_id\": 1,\n    \"photo\": \"candidats\/photos\/johndoe_updated.jpg\"\n  }\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n  \"success\": false,\n  \"message\": \"Candidat introuvable\",\n  \"body\": null\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 406,
+                            "body": "{\n  \"success\": false,\n  \"message\": \"Vous ne pouvez pas modifi\u00e9 un candidat apr\u00e8s la date de lancement des \u00e9lections\",\n  \"body\": \"\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 406,
+                            "body": "{\n  \"success\": false,\n  \"message\": \"Ce candidat ne candidate pas pour cette election\",\n  \"body\": null\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Add a new candidate to an election.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/candidat",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/candidat"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "multipart\/form-data"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "npi",
+                                    "value": "123456789",
+                                    "type": "text",
+                                    "description": "The unique NPI identifier of the candidate."
+                                },
+                                {
+                                    "key": "election_id",
+                                    "value": 1,
+                                    "type": "text",
+                                    "description": "The ID of the election."
+                                },
+                                {
+                                    "key": "description",
+                                    "value": "Une petite description",
+                                    "type": "text",
+                                    "description": "The description of the candidate."
+                                },
+                                {
+                                    "key": "name",
+                                    "value": "John Doe",
+                                    "type": "text",
+                                    "description": "The name of the candidate."
+                                },
+                                {
+                                    "key": "image",
+                                    "src": [],
+                                    "type": "file"
+                                },
+                                {
+                                    "key": "photo",
+                                    "src": [],
+                                    "type": "file"
+                                }
+                            ]
+                        },
+                        "description": "This endpoint allows adding a new candidate to an election. Candidates cannot be added after the election's start date.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n  \"success\": true,\n  \"message\": \"Candidat ajout\u00e9 avec succ\u00e8s\",\n  \"body\": {\n    \"id\": 1,\n    \"name\": \"John Doe\",\n    \"description\": \"Une bonne description\",\n    \"npi\": \"123456789\",\n    \"election_id\": 1,\n    \"photo\": \"candidats\/photos\/johndoe.jpg\"\n  }\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 406,
+                            "body": "{\n  \"success\": false,\n  \"message\": \"Ce candidat est d\u00e9j\u00e0 inscrit \u00e0 cette \u00e9lection\",\n  \"body\": \"\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 406,
+                            "body": "{\n  \"success\": false,\n  \"message\": \"Vous ne pouvez plus ajouter de candidat apr\u00e8s la date de lancement des \u00e9lections\",\n  \"body\": \"\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Delete a candidate.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/candidat\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/candidat\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "The ID of the candidate to delete."
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "This endpoint deletes a candidate. Candidates cannot be deleted after the election's start date.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"message\": \"Candidat retir\u00e9 avec succ\u00e8s\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n  \"success\": false,\n  \"message\": \"\",\n  \"body\": \"Candidat introuvable\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 406,
+                            "body": "{\n  \"success\": false,\n  \"message\": \"Vous ne pouvez pas supprimer un candidat apr\u00e8s la date de lancement des \u00e9lections\",\n  \"body\": \"\"\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Elections",
+            "description": "",
+            "item": [
+                {
+                    "name": "Retrieve all elections.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/elections",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/elections"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"success\": true,\n  \"message\": \"\",\n  \"body\": [\n    {\n      \"id\": 1,\n      \"name\": \"Presidential Election\",\n      \"start_date\": \"2024-01-01\",\n      \"end_date\": \"2024-01-10\",\n      \"status\": true\n    }\n  ]\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Create a new election.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/elections",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/elections"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"Presidential Election\",\"start_date\":\"2024-01-01\",\"end_date\":\"2024-01-10\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n  \"success\": true,\n  \"message\": \"Election created successfully\",\n  \"body\": {\n    \"id\": 1,\n    \"name\": \"Presidential Election\",\n    \"start_date\": \"2025-01-01\",\n    \"end_date\": \"2025-01-10\",\n    \"status\": true\n  }\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 406,
+                            "body": "{\n  \"success\": true,\n  \"message\": \"Validation des donn\u00e9es \u00e9chou\u00e9e. \",\n  \"body\": [erreur de validation]\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Retrieve a specific election.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/elections\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/elections\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "The ID of the election."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"success\": true,\n  \"message\": \"\",\n  \"body\": {\n    \"id\": 1,\n    \"name\": \"Presidential Election\",\n    \"start_date\": \"2024-01-01\",\n    \"end_date\": \"2024-01-10\",\n    \"status\": true\n  }",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n  \"success\": false,\n  \"message\": \"Election introuvable\",\n  \"body\": null\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Update an election.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/elections\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/elections\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "The ID of the election to update."
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"Updated Election\",\"start_date\":\"2024-01-05\",\"end_date\":\"2024-01-15\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"success\": true,\n  \"message\": \"Election mis \u00e0 jour avec succ\u00e8s\",\n  \"body\": {\n    \"id\": 1,\n    \"name\": \"Updated Election\",\n    \"start_date\": \"2024-01-05\",\n    \"end_date\": \"2024-01-15\",\n    \"status\": true\n  }\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n   \"success\": false,\n   \"message\": \"Election introuvable\",\n   \"body\": null\n }",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Delete an election.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/elections\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/elections\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "The ID of the election to delete."
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"success\": true,\n  \"message\": \"Election supprim\u00e9 avec succ\u00e8s\",\n  \"body\": {}\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n    \"success\": false,\n    \"message\": \"Election introuvable\",\n    \"body\": null\n  }",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Retrieve elections currently in progress.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/election_inprogress",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/election_inprogress"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"success\": true,\n  \"message\": \"\",\n  \"body\": [\n    {\n      \"id\": 2,\n      \"name\": \"Midterm Election\",\n      \"start_date\": \"2024-12-25\",\n      \"end_date\": \"2025-01-05\",\n      \"status\": true\n    }\n  ]\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Retrieve completed elections.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/election_completed",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/election_completed"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"success\": true,\n  \"message\": \"\",\n  \"body\": [\n    {\n      \"id\": 1,\n      \"name\": \"Presidential Election\",\n      \"start_date\": \"2024-01-01\",\n      \"end_date\": \"2024-01-10\",\n      \"status\": false\n    }\n  ]\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Retrieve elections that have not started.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/election_notStarted",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/election_notStarted"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"success\": true,\n  \"message\": \"\",\n  \"body\": [\n    {\n      \"id\": 3,\n      \"name\": \"Upcoming Election\",\n      \"start_date\": \"2025-02-01\",\n      \"end_date\": \"2025-02-10\",\n      \"status\": false\n    }\n  ]\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Create a second round of an election.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/second_tour\/:election_id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/second_tour\/:election_id",
+                            "variable": [
+                                {
+                                    "id": "election_id",
+                                    "key": "election_id",
+                                    "value": "2024",
+                                    "description": "The ID of the election. Example: 1\nrequired The start date of the election."
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"start_date\":\"2025-01-05T14:30:09\",\"end_date\":\"2024-01-10\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n  \"success\": true,\n  \"message\": \"Election du deuxi\u00e8me tour cr\u00e9e avec succ\u00e8s\",\n  \"body\": []\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 400,
+                            "body": "{\n  \"success\": false,\n  \"message\": \"Vous ne pouvez pas cr\u00e9er de second tour pour cette \u00e9lection\",\n  \"body\": []\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n    \"success\": false,\n    \"message\": \"Election introuvable\",\n    \"body\": null\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 406,
+                            "body": "{\n  \"success\": false,\n  \"message\": \"Op\u00e9ration \u00e9chou\u00e9. L'\u00e9lection n'est pas termin\u00e9e\",\n  \"body\": []\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 406,
+                            "body": "{\n  \"success\": false,\n  \"message\": \"Op\u00e9ration \u00e9chou\u00e9. Le second tour doit commencer \u00e0 la fin du premier tour\",\n  \"body\": []\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Endpoints",
+            "description": "",
+            "item": [
+                {
+                    "name": "GET api\/user",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/user",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/user"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Resultat",
+            "description": "",
+            "item": [
+                {
+                    "name": "Affiche les r\u00e9sultats d'une \u00e9lection et met \u00e0 jour son statut si un candidat d\u00e9passe 50 % des votes.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/resultats\/:election_id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/resultats\/:election_id",
+                            "variable": [
+                                {
+                                    "id": "election_id",
+                                    "key": "election_id",
+                                    "value": "4",
+                                    "description": "L'ID de l'\u00e9lection dont on veut les r\u00e9sultats. Exemple : 1"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Cette m\u00e9thode r\u00e9cup\u00e8re les r\u00e9sultats d'une \u00e9lection en fonction de l'ID fourni.\nSi un des candidats a un pourcentage sup\u00e9rieur \u00e0 50 %, le statut de l'\u00e9lection est mis \u00e0 jour \u00e0 \"true\".",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n   \"success\": true,\n   \"message\": \"\",\n   \"data\": [\n       [\n           {\n               \"id\": 1,\n               \"election_id\": 1,\n               \"candidat_id\": 2,\n               \"votes\": 100,\n               \"percentage\": 60\n           },\n           {\n               \"id\": 2,\n               \"election_id\": 1,\n               \"candidat_id\": 3,\n               \"votes\": 40,\n               \"percentage\": 40\n           }\n       ],\n       true\n   ]\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n   \"success\": false,\n   \"message\": \"Election introuvable\",\n   \"data\": null\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Votes",
+            "description": "",
+            "item": [
+                {
+                    "name": "Affiche tous les votes pour une \u00e9lection donn\u00e9e.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/votes\/:election_id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/votes\/:election_id",
+                            "variable": [
+                                {
+                                    "id": "election_id",
+                                    "key": "election_id",
+                                    "value": "3",
+                                    "description": "L'identifiant de l'\u00e9lection."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"success\": true,\n  \"message\": \"\",\n  \"data\": [\n    {\n      \"id\": 1,\n      \"election_id\": 3,\n      \"candidat_id\": 5,\n      \"voter_id\": 2,\n      \"created_at\": \"2025-01-01T12:00:00\",\n      \"updated_at\": \"2025-01-01T12:00:00\"\n    }\n  ]\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "V\u00e9rifie si un utilisateur a d\u00e9ja vot\u00e9.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/vote\/:election_id\/:user_id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/vote\/:election_id\/:user_id",
+                            "variable": [
+                                {
+                                    "id": "election_id",
+                                    "key": "election_id",
+                                    "value": "1",
+                                    "description": "L'identifiant de l'\u00e9l\u00e9ction."
+                                },
+                                {
+                                    "id": "user_id",
+                                    "key": "user_id",
+                                    "value": "1",
+                                    "description": "L'identifiant de l'utilisateur."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"success\": false,\n    \"message\": \"Vous avez d\u00e9ja vot\u00e9\",\n    \"data\": []\n }",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n    \"success\": true,\n    \"message\": \"Vous pouvez vot\u00e9\",\n    \"data\": []\n }",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Cr\u00e9e un nouveau vote.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/vote",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/vote"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"user_id\":11,\"candidat_id\":5,\"election_id\":3,\"voter_id\":2}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n  \"success\": true,\n  \"message\": \"Vote enregistr\u00e9 avec succ\u00e8s\",\n  \"data\": {\n    \"id\": 1,\n    \"election_id\": 3,\n    \"candidat_id\": 5,\n    \"voter_id\": 2,\n    \"created_at\": \"2025-01-01T12:00:00\",\n    \"updated_at\": \"2025-01-01T12:00:00\"\n  }\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 406,
+                            "body": "{\n  \"success\": false,\n  \"message\": \"Vous n'\u00eates pas autoris\u00e9 \u00e0 voter en cette p\u00e9riode\",\n  \"data\": null\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 406,
+                            "body": "{\n  \"success\": false,\n  \"message\": \"Vous avez d\u00e9ja vot\u00e9\",\n  \"data\": []\n}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "auth": {
+        "type": "noauth"
+    }
+}

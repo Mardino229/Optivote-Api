@@ -1,0 +1,1788 @@
+openapi: 3.0.3
+info:
+  title: Laravel
+  description: ''
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost'
+paths:
+  /api/register:
+    post:
+      summary: 'Create a new user account.'
+      operationId: createANewUserAccount
+      description: "This endpoint allows users to create a new account.\nThe user must provide their NPI, email, and password."
+      parameters: []
+      responses:
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  message: 'Compte créer avec succès'
+                  body: ''
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: 'Compte créer avec succès'
+                  body:
+                    type: string
+                    example: ''
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: false
+                  message: 'Npi incorrect.'
+                  body: ''
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: 'Npi incorrect.'
+                  body:
+                    type: string
+                    example: ''
+        406:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: false
+                  message: "L'utilisateur existe déjà"
+                  body: ''
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "L'utilisateur existe déjà"
+                  body:
+                    type: string
+                    example: ''
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                npi:
+                  type: integer
+                  description: 'The unique NPI identifier of the person.'
+                  example: 123456789
+                  nullable: false
+                email:
+                  type: string
+                  description: 'The email address of the user.'
+                  example: user@example.com
+                  nullable: false
+                password:
+                  type: string
+                  description: 'The password for the new account. Minimum length: 8 characters.'
+                  example: .B%LFVr\pl
+                  nullable: false
+              required:
+                - npi
+                - email
+                - password
+      security: []
+  /api/login:
+    post:
+      summary: 'Log in a user.'
+      operationId: logInAUser
+      description: 'This endpoint allows a user to log in with their email and password.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  message: 'Connexion réussie'
+                  body: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: 'Connexion réussie'
+                  body:
+                    type: string
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: false
+                  message: 'Identifiants incorrects'
+                  body: ''
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: 'Identifiants incorrects'
+                  body:
+                    type: string
+                    example: ''
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'The email address of the user.'
+                  example: user@example.com
+                  nullable: false
+                password:
+                  type: string
+                  description: 'The password of the user.'
+                  example: 'CRo,p;btgiXM#7p~BeU'
+                  nullable: false
+              required:
+                - email
+                - password
+      security: []
+  /api/logout:
+    post:
+      summary: 'Log out a user.'
+      operationId: logOutAUser
+      description: 'This endpoint logs out the authenticated user and deletes their tokens.'
+      parameters: []
+      responses:
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  message: 'Déconnexion réussie'
+                  body: ''
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: 'Déconnexion réussie'
+                  body:
+                    type: string
+                    example: ''
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                npi:
+                  type: integer
+                  description: 'The NPI of the user.'
+                  example: 115586654
+                  nullable: false
+              required:
+                - npi
+      security: []
+  '/api/candidats/{election_id}':
+    get:
+      summary: 'List all candidates for an election.'
+      operationId: listAllCandidatesForAnElection
+      description: 'This endpoint retrieves all candidates for a specific election.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  -
+                    description: ''
+                    type: object
+                    example:
+                      success: true
+                      message: ''
+                      body:
+                        -
+                          id: 1
+                          name: 'John Doe'
+                          npi: '123456789'
+                          election_id: 1
+                          description: 'Une description du candidat'
+                          photo: candidats/photos/johndoe.jpg
+                    properties:
+                      success:
+                        type: boolean
+                        example: true
+                      message:
+                        type: string
+                        example: ''
+                      body:
+                        type: array
+                        example:
+                          -
+                            id: 1
+                            name: 'John Doe'
+                            npi: '123456789'
+                            election_id: 1
+                            description: 'Une description du candidat'
+                            photo: candidats/photos/johndoe.jpg
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              example: 1
+                            name:
+                              type: string
+                              example: 'John Doe'
+                            npi:
+                              type: string
+                              example: '123456789'
+                            election_id:
+                              type: integer
+                              example: 1
+                            description:
+                              type: string
+                              example: 'Une description du candidat'
+                            photo:
+                              type: string
+                              example: candidats/photos/johndoe.jpg
+                  -
+                    description: ''
+                    type: object
+                    example:
+                      success: false
+                      message: 'Election introuvable'
+                      body: null
+                    properties:
+                      success:
+                        type: boolean
+                        example: false
+                      message:
+                        type: string
+                        example: 'Election introuvable'
+                      body:
+                        type: string
+                        example: null
+      tags:
+        - Candidates
+      security: []
+    parameters:
+      -
+        in: path
+        name: election_id
+        description: 'The ID of the election.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+  '/api/candidat/{id}':
+    get:
+      summary: 'Retrieve a specific candidate.'
+      operationId: retrieveASpecificCandidate
+      description: 'This endpoint retrieves the details of a specific candidate by ID.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  message: ''
+                  body:
+                    id: 1
+                    name: 'John Doe'
+                    npi: '123456789'
+                    election_id: 1
+                    photo: candidats/photos/johndoe.jpg
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: ''
+                  body:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      name:
+                        type: string
+                        example: 'John Doe'
+                      npi:
+                        type: string
+                        example: '123456789'
+                      election_id:
+                        type: integer
+                        example: 1
+                      photo:
+                        type: string
+                        example: candidats/photos/johndoe.jpg
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: false
+                  message: 'Candidat introuvable'
+                  body: null
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: 'Candidat introuvable'
+                  body:
+                    type: string
+                    example: null
+      tags:
+        - Candidates
+      security: []
+    post:
+      summary: 'Update a candidate.'
+      operationId: updateACandidate
+      description: "This endpoint allows updating the details of a specific candidate. Changes cannot be made after the election's start date."
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  message: 'Candidat mis à jour avec succès'
+                  body:
+                    id: 1
+                    name: 'John Doe'
+                    description: 'Une bonne description'
+                    npi: '123456789'
+                    election_id: 1
+                    photo: candidats/photos/johndoe_updated.jpg
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: 'Candidat mis à jour avec succès'
+                  body:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      name:
+                        type: string
+                        example: 'John Doe'
+                      description:
+                        type: string
+                        example: 'Une bonne description'
+                      npi:
+                        type: string
+                        example: '123456789'
+                      election_id:
+                        type: integer
+                        example: 1
+                      photo:
+                        type: string
+                        example: candidats/photos/johndoe_updated.jpg
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: false
+                  message: 'Candidat introuvable'
+                  body: null
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: 'Candidat introuvable'
+                  body:
+                    type: string
+                    example: null
+        406:
+          description: ''
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  -
+                    description: ''
+                    type: object
+                    example:
+                      success: false
+                      message: 'Vous ne pouvez pas modifié un candidat après la date de lancement des élections'
+                      body: ''
+                    properties:
+                      success:
+                        type: boolean
+                        example: false
+                      message:
+                        type: string
+                        example: 'Vous ne pouvez pas modifié un candidat après la date de lancement des élections'
+                      body:
+                        type: string
+                        example: ''
+                  -
+                    description: ''
+                    type: object
+                    example:
+                      success: false
+                      message: 'Ce candidat ne candidate pas pour cette election'
+                      body: null
+                    properties:
+                      success:
+                        type: boolean
+                        example: false
+                      message:
+                        type: string
+                        example: 'Ce candidat ne candidate pas pour cette election'
+                      body:
+                        type: string
+                        example: null
+      tags:
+        - Candidates
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                npi:
+                  type: string
+                  description: 'The unique NPI identifier of the candidate.'
+                  example: '123456789'
+                  nullable: false
+                election_id:
+                  type: integer
+                  description: 'The ID of the election.'
+                  example: 1
+                  nullable: false
+                description:
+                  type: string
+                  description: 'The name of the candidate.'
+                  example: 'Une bonne description'
+                  nullable: true
+                image:
+                  type: string
+                  format: binary
+                  description: 'Must be an image. Must not be greater than 2048 kilobytes.'
+                  nullable: true
+                name:
+                  type: string
+                  description: 'The name of the candidate.'
+                  example: 'John Doe'
+                  nullable: false
+                photo:
+                  type: string
+                  format: binary
+                  description: 'The photo of the candidate (optional).'
+                  nullable: false
+              required:
+                - npi
+                - election_id
+                - description
+                - name
+      security: []
+    delete:
+      summary: 'Delete a candidate.'
+      operationId: deleteACandidate
+      description: "This endpoint deletes a candidate. Candidates cannot be deleted after the election's start date."
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Candidat retiré avec succès'
+                properties:
+                  message:
+                    type: string
+                    example: 'Candidat retiré avec succès'
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: false
+                  message: ''
+                  body: 'Candidat introuvable'
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: ''
+                  body:
+                    type: string
+                    example: 'Candidat introuvable'
+        406:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: false
+                  message: 'Vous ne pouvez pas supprimer un candidat après la date de lancement des élections'
+                  body: ''
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: 'Vous ne pouvez pas supprimer un candidat après la date de lancement des élections'
+                  body:
+                    type: string
+                    example: ''
+      tags:
+        - Candidates
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the candidate.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+  /api/candidat:
+    post:
+      summary: 'Add a new candidate to an election.'
+      operationId: addANewCandidateToAnElection
+      description: "This endpoint allows adding a new candidate to an election. Candidates cannot be added after the election's start date."
+      parameters: []
+      responses:
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  message: 'Candidat ajouté avec succès'
+                  body:
+                    id: 1
+                    name: 'John Doe'
+                    description: 'Une bonne description'
+                    npi: '123456789'
+                    election_id: 1
+                    photo: candidats/photos/johndoe.jpg
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: 'Candidat ajouté avec succès'
+                  body:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      name:
+                        type: string
+                        example: 'John Doe'
+                      description:
+                        type: string
+                        example: 'Une bonne description'
+                      npi:
+                        type: string
+                        example: '123456789'
+                      election_id:
+                        type: integer
+                        example: 1
+                      photo:
+                        type: string
+                        example: candidats/photos/johndoe.jpg
+        406:
+          description: ''
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  -
+                    description: ''
+                    type: object
+                    example:
+                      success: false
+                      message: 'Ce candidat est déjà inscrit à cette élection'
+                      body: ''
+                    properties:
+                      success:
+                        type: boolean
+                        example: false
+                      message:
+                        type: string
+                        example: 'Ce candidat est déjà inscrit à cette élection'
+                      body:
+                        type: string
+                        example: ''
+                  -
+                    description: ''
+                    type: object
+                    example:
+                      success: false
+                      message: 'Vous ne pouvez plus ajouter de candidat après la date de lancement des élections'
+                      body: ''
+                    properties:
+                      success:
+                        type: boolean
+                        example: false
+                      message:
+                        type: string
+                        example: 'Vous ne pouvez plus ajouter de candidat après la date de lancement des élections'
+                      body:
+                        type: string
+                        example: ''
+      tags:
+        - Candidates
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                npi:
+                  type: string
+                  description: 'The unique NPI identifier of the candidate.'
+                  example: '123456789'
+                  nullable: false
+                election_id:
+                  type: integer
+                  description: 'The ID of the election.'
+                  example: 1
+                  nullable: false
+                description:
+                  type: string
+                  description: 'The description of the candidate.'
+                  example: 'Une petite description'
+                  nullable: true
+                image:
+                  type: string
+                  format: binary
+                  description: 'Must be an image. Must not be greater than 2048 kilobytes.'
+                  nullable: true
+                name:
+                  type: string
+                  description: 'The name of the candidate.'
+                  example: 'John Doe'
+                  nullable: false
+                photo:
+                  type: string
+                  format: binary
+                  description: 'The photo of the candidate (optional).'
+                  nullable: false
+              required:
+                - npi
+                - election_id
+                - description
+                - name
+      security: []
+  /api/elections:
+    get:
+      summary: 'Retrieve all elections.'
+      operationId: retrieveAllElections
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  message: ''
+                  body:
+                    -
+                      id: 1
+                      name: 'Presidential Election'
+                      start_date: '2024-01-01'
+                      end_date: '2024-01-10'
+                      status: true
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: ''
+                  body:
+                    type: array
+                    example:
+                      -
+                        id: 1
+                        name: 'Presidential Election'
+                        start_date: '2024-01-01'
+                        end_date: '2024-01-10'
+                        status: true
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        name:
+                          type: string
+                          example: 'Presidential Election'
+                        start_date:
+                          type: string
+                          example: '2024-01-01'
+                        end_date:
+                          type: string
+                          example: '2024-01-10'
+                        status:
+                          type: boolean
+                          example: true
+      tags:
+        - Elections
+      security: []
+    post:
+      summary: 'Create a new election.'
+      operationId: createANewElection
+      description: ''
+      parameters: []
+      responses:
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  message: 'Election created successfully'
+                  body:
+                    id: 1
+                    name: 'Presidential Election'
+                    start_date: '2025-01-01'
+                    end_date: '2025-01-10'
+                    status: true
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: 'Election created successfully'
+                  body:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      name:
+                        type: string
+                        example: 'Presidential Election'
+                      start_date:
+                        type: string
+                        example: '2025-01-01'
+                      end_date:
+                        type: string
+                        example: '2025-01-10'
+                      status:
+                        type: boolean
+                        example: true
+        406:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"success\": true,\n  \"message\": \"Validation des données échouée. \",\n  \"body\": [erreur de validation]\n}"
+      tags:
+        - Elections
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'The name of the election.'
+                  example: 'Presidential Election'
+                  nullable: false
+                start_date:
+                  type: date
+                  description: 'The start date of the election.'
+                  example: '2024-01-01'
+                  nullable: false
+                end_date:
+                  type: date
+                  description: 'The end date of the election.'
+                  example: '2024-01-10'
+                  nullable: false
+              required:
+                - name
+                - start_date
+                - end_date
+      security: []
+  '/api/elections/{id}':
+    get:
+      summary: 'Retrieve a specific election.'
+      operationId: retrieveASpecificElection
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"success\": true,\n  \"message\": \"\",\n  \"body\": {\n    \"id\": 1,\n    \"name\": \"Presidential Election\",\n    \"start_date\": \"2024-01-01\",\n    \"end_date\": \"2024-01-10\",\n    \"status\": true\n  }"
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: false
+                  message: 'Election introuvable'
+                  body: null
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: 'Election introuvable'
+                  body:
+                    type: string
+                    example: null
+      tags:
+        - Elections
+      security: []
+    put:
+      summary: 'Update an election.'
+      operationId: updateAnElection
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  message: 'Election mis à jour avec succès'
+                  body:
+                    id: 1
+                    name: 'Updated Election'
+                    start_date: '2024-01-05'
+                    end_date: '2024-01-15'
+                    status: true
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: 'Election mis à jour avec succès'
+                  body:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      name:
+                        type: string
+                        example: 'Updated Election'
+                      start_date:
+                        type: string
+                        example: '2024-01-05'
+                      end_date:
+                        type: string
+                        example: '2024-01-15'
+                      status:
+                        type: boolean
+                        example: true
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: false
+                  message: 'Election introuvable'
+                  body: null
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: 'Election introuvable'
+                  body:
+                    type: string
+                    example: null
+      tags:
+        - Elections
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'The name of the election.'
+                  example: 'Updated Election'
+                  nullable: false
+                start_date:
+                  type: date
+                  description: 'The updated start date of the election.'
+                  example: '2024-01-05'
+                  nullable: false
+                end_date:
+                  type: date
+                  description: 'The updated end date of the election.'
+                  example: '2024-01-15'
+                  nullable: false
+      security: []
+    delete:
+      summary: 'Delete an election.'
+      operationId: deleteAnElection
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  message: 'Election supprimé avec succès'
+                  body: {  }
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: 'Election supprimé avec succès'
+                  body:
+                    type: object
+                    properties: {  }
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: false
+                  message: 'Election introuvable'
+                  body: null
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: 'Election introuvable'
+                  body:
+                    type: string
+                    example: null
+      tags:
+        - Elections
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the election.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+  /api/election_inprogress:
+    get:
+      summary: 'Retrieve elections currently in progress.'
+      operationId: retrieveElectionsCurrentlyInProgress
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  message: ''
+                  body:
+                    -
+                      id: 2
+                      name: 'Midterm Election'
+                      start_date: '2024-12-25'
+                      end_date: '2025-01-05'
+                      status: true
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: ''
+                  body:
+                    type: array
+                    example:
+                      -
+                        id: 2
+                        name: 'Midterm Election'
+                        start_date: '2024-12-25'
+                        end_date: '2025-01-05'
+                        status: true
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 2
+                        name:
+                          type: string
+                          example: 'Midterm Election'
+                        start_date:
+                          type: string
+                          example: '2024-12-25'
+                        end_date:
+                          type: string
+                          example: '2025-01-05'
+                        status:
+                          type: boolean
+                          example: true
+      tags:
+        - Elections
+      security: []
+  /api/election_completed:
+    get:
+      summary: 'Retrieve completed elections.'
+      operationId: retrieveCompletedElections
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  message: ''
+                  body:
+                    -
+                      id: 1
+                      name: 'Presidential Election'
+                      start_date: '2024-01-01'
+                      end_date: '2024-01-10'
+                      status: false
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: ''
+                  body:
+                    type: array
+                    example:
+                      -
+                        id: 1
+                        name: 'Presidential Election'
+                        start_date: '2024-01-01'
+                        end_date: '2024-01-10'
+                        status: false
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        name:
+                          type: string
+                          example: 'Presidential Election'
+                        start_date:
+                          type: string
+                          example: '2024-01-01'
+                        end_date:
+                          type: string
+                          example: '2024-01-10'
+                        status:
+                          type: boolean
+                          example: false
+      tags:
+        - Elections
+      security: []
+  /api/election_notStarted:
+    get:
+      summary: 'Retrieve elections that have not started.'
+      operationId: retrieveElectionsThatHaveNotStarted
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  message: ''
+                  body:
+                    -
+                      id: 3
+                      name: 'Upcoming Election'
+                      start_date: '2025-02-01'
+                      end_date: '2025-02-10'
+                      status: false
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: ''
+                  body:
+                    type: array
+                    example:
+                      -
+                        id: 3
+                        name: 'Upcoming Election'
+                        start_date: '2025-02-01'
+                        end_date: '2025-02-10'
+                        status: false
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 3
+                        name:
+                          type: string
+                          example: 'Upcoming Election'
+                        start_date:
+                          type: string
+                          example: '2025-02-01'
+                        end_date:
+                          type: string
+                          example: '2025-02-10'
+                        status:
+                          type: boolean
+                          example: false
+      tags:
+        - Elections
+      security: []
+  '/api/second_tour/{election_id}':
+    post:
+      summary: 'Create a second round of an election.'
+      operationId: createASecondRoundOfAnElection
+      description: ''
+      parameters: []
+      responses:
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  message: 'Election du deuxième tour crée avec succès'
+                  body: []
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: 'Election du deuxième tour crée avec succès'
+                  body:
+                    type: array
+                    example: []
+        400:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: false
+                  message: 'Vous ne pouvez pas créer de second tour pour cette élection'
+                  body: []
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: 'Vous ne pouvez pas créer de second tour pour cette élection'
+                  body:
+                    type: array
+                    example: []
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: false
+                  message: 'Election introuvable'
+                  body: null
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: 'Election introuvable'
+                  body:
+                    type: string
+                    example: null
+        406:
+          description: ''
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  -
+                    description: ''
+                    type: object
+                    example:
+                      success: false
+                      message: "Opération échoué. L'élection n'est pas terminée"
+                      body: []
+                    properties:
+                      success:
+                        type: boolean
+                        example: false
+                      message:
+                        type: string
+                        example: "Opération échoué. L'élection n'est pas terminée"
+                      body:
+                        type: array
+                        example: []
+                  -
+                    description: ''
+                    type: object
+                    example:
+                      success: false
+                      message: 'Opération échoué. Le second tour doit commencer à la fin du premier tour'
+                      body: []
+                    properties:
+                      success:
+                        type: boolean
+                        example: false
+                      message:
+                        type: string
+                        example: 'Opération échoué. Le second tour doit commencer à la fin du premier tour'
+                      body:
+                        type: array
+                        example: []
+      tags:
+        - Elections
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                start_date:
+                  type: string
+                  description: 'Must be a valid date.'
+                  example: '2025-01-05T14:30:09'
+                  nullable: false
+                end_date:
+                  type: date
+                  description: 'The end date of the election.'
+                  example: '2024-01-10'
+                  nullable: false
+              required:
+                - start_date
+                - end_date
+      security: []
+    parameters:
+      -
+        in: path
+        name: election_id
+        description: "The ID of the election. Example: 1\nrequired The start date of the election."
+        example: 2024
+        required: true
+        schema:
+          type: integer
+  /api/user:
+    get:
+      summary: ''
+      operationId: getApiUser
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  '/api/resultats/{election_id}':
+    get:
+      summary: "Affiche les résultats d'une élection et met à jour son statut si un candidat dépasse 50 % des votes."
+      operationId: afficheLesRsultatsDunelectionEtMetJourSonStatutSiUnCandidatDpasse50DesVotes
+      description: "Cette méthode récupère les résultats d'une élection en fonction de l'ID fourni.\nSi un des candidats a un pourcentage supérieur à 50 %, le statut de l'élection est mis à jour à \"true\"."
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  message: ''
+                  data:
+                    -
+                      -
+                        id: 1
+                        election_id: 1
+                        candidat_id: 2
+                        votes: 100
+                        percentage: 60
+                      -
+                        id: 2
+                        election_id: 1
+                        candidat_id: 3
+                        votes: 40
+                        percentage: 40
+                    - true
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: ''
+                  data:
+                    type: array
+                    example:
+                      -
+                        -
+                          id: 1
+                          election_id: 1
+                          candidat_id: 2
+                          votes: 100
+                          percentage: 60
+                        -
+                          id: 2
+                          election_id: 1
+                          candidat_id: 3
+                          votes: 40
+                          percentage: 40
+                      - true
+                    items:
+                      type: array
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: false
+                  message: 'Election introuvable'
+                  data: null
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: 'Election introuvable'
+                  data:
+                    type: string
+                    example: null
+      tags:
+        - Resultat
+      security: []
+    parameters:
+      -
+        in: path
+        name: election_id
+        description: "L'ID de l'élection dont on veut les résultats. Exemple : 1"
+        example: 4
+        required: true
+        schema:
+          type: integer
+  '/api/votes/{election_id}':
+    get:
+      summary: 'Affiche tous les votes pour une élection donnée.'
+      operationId: afficheTousLesVotesPourUnelectionDonne
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  message: ''
+                  data:
+                    -
+                      id: 1
+                      election_id: 3
+                      candidat_id: 5
+                      voter_id: 2
+                      created_at: '2025-01-01T12:00:00'
+                      updated_at: '2025-01-01T12:00:00'
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: ''
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 1
+                        election_id: 3
+                        candidat_id: 5
+                        voter_id: 2
+                        created_at: '2025-01-01T12:00:00'
+                        updated_at: '2025-01-01T12:00:00'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        election_id:
+                          type: integer
+                          example: 3
+                        candidat_id:
+                          type: integer
+                          example: 5
+                        voter_id:
+                          type: integer
+                          example: 2
+                        created_at:
+                          type: string
+                          example: '2025-01-01T12:00:00'
+                        updated_at:
+                          type: string
+                          example: '2025-01-01T12:00:00'
+      tags:
+        - Votes
+      security: []
+    parameters:
+      -
+        in: path
+        name: election_id
+        description: "L'identifiant de l'élection."
+        example: 3
+        required: true
+        schema:
+          type: integer
+  '/api/vote/{election_id}/{user_id}':
+    get:
+      summary: 'Vérifie si un utilisateur a déja voté.'
+      operationId: vrifieSiUnUtilisateurADjaVot
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  -
+                    description: ''
+                    type: object
+                    example:
+                      success: false
+                      message: 'Vous avez déja voté'
+                      data: []
+                    properties:
+                      success:
+                        type: boolean
+                        example: false
+                      message:
+                        type: string
+                        example: 'Vous avez déja voté'
+                      data:
+                        type: array
+                        example: []
+                  -
+                    description: ''
+                    type: object
+                    example:
+                      success: true
+                      message: 'Vous pouvez voté'
+                      data: []
+                    properties:
+                      success:
+                        type: boolean
+                        example: true
+                      message:
+                        type: string
+                        example: 'Vous pouvez voté'
+                      data:
+                        type: array
+                        example: []
+      tags:
+        - Votes
+      security: []
+    parameters:
+      -
+        in: path
+        name: election_id
+        description: "L'identifiant de l'éléction."
+        example: 1
+        required: true
+        schema:
+          type: integer
+      -
+        in: path
+        name: user_id
+        description: "L'identifiant de l'utilisateur."
+        example: 1
+        required: true
+        schema:
+          type: integer
+  /api/vote:
+    post:
+      summary: 'Crée un nouveau vote.'
+      operationId: creUnNouveauVote
+      description: ''
+      parameters: []
+      responses:
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  message: 'Vote enregistré avec succès'
+                  data:
+                    id: 1
+                    election_id: 3
+                    candidat_id: 5
+                    voter_id: 2
+                    created_at: '2025-01-01T12:00:00'
+                    updated_at: '2025-01-01T12:00:00'
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: 'Vote enregistré avec succès'
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      election_id:
+                        type: integer
+                        example: 3
+                      candidat_id:
+                        type: integer
+                        example: 5
+                      voter_id:
+                        type: integer
+                        example: 2
+                      created_at:
+                        type: string
+                        example: '2025-01-01T12:00:00'
+                      updated_at:
+                        type: string
+                        example: '2025-01-01T12:00:00'
+        406:
+          description: ''
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  -
+                    description: ''
+                    type: object
+                    example:
+                      success: false
+                      message: "Vous n'êtes pas autorisé à voter en cette période"
+                      data: null
+                    properties:
+                      success:
+                        type: boolean
+                        example: false
+                      message:
+                        type: string
+                        example: "Vous n'êtes pas autorisé à voter en cette période"
+                      data:
+                        type: string
+                        example: null
+                  -
+                    description: ''
+                    type: object
+                    example:
+                      success: false
+                      message: 'Vous avez déja voté'
+                      data: []
+                    properties:
+                      success:
+                        type: boolean
+                        example: false
+                      message:
+                        type: string
+                        example: 'Vous avez déja voté'
+                      data:
+                        type: array
+                        example: []
+      tags:
+        - Votes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: integer
+                  description: 'The <code>id</code> of an existing record in the users table.'
+                  example: 11
+                  nullable: false
+                candidat_id:
+                  type: integer
+                  description: "L'identifiant du candidat."
+                  example: 5
+                  nullable: false
+                election_id:
+                  type: integer
+                  description: "L'identifiant de l'élection."
+                  example: 3
+                  nullable: false
+                voter_id:
+                  type: integer
+                  description: "L'identifiant du votant."
+                  example: 2
+                  nullable: false
+              required:
+                - user_id
+                - candidat_id
+                - election_id
+                - voter_id
+      security: []
+tags:
+  -
+    name: Authentication
+    description: ''
+  -
+    name: Candidates
+    description: ''
+  -
+    name: Elections
+    description: ''
+  -
+    name: Endpoints
+    description: ''
+  -
+    name: Resultat
+    description: ''
+  -
+    name: Votes
+    description: ''
