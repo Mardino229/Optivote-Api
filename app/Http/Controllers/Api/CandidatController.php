@@ -90,6 +90,7 @@ class CandidatController extends Controller
      */
     public function store(CandidatRequest $request)
     {
+
         $candidatData = $request->validated();
         $election = Election::find($request->election_id);
         if (UtilsController::before($election->start_date)) {

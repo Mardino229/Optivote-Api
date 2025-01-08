@@ -16,6 +16,8 @@ Route::controller(AuthApiController::class)->group(function(){
     Route::post('register', 'create');
     Route::post('login', 'login');
     Route::post('logout', 'destroy');
+    Route::post('/password/send-otp', 'sendOtp');
+    Route::post('/password/reset', 'resetPassword');
 });
 
 Route::middleware(['auth:sanctum'])->group(function () {

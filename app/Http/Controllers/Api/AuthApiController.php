@@ -3,23 +3,18 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\PasswordReset;
 use App\Models\Person;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 
 class AuthApiController extends Controller
 {
-    public static function apiResponse($success, $message, $data = [], $status = 200)
-    {
-        return response()->json([
-            'success' => $success,
-            'message' => $message,
-            'body' => $data
-        ], $status);
-    }
 
     /**
      * Create a new user account.
@@ -52,13 +47,13 @@ class AuthApiController extends Controller
         $person = Person::where('npi', $request->npi)->first();
 
         if ($person == null) {
-            return self::apiResponse(false, 'Npi incorrect.', '', 404);
+            return ResponseApiController::apiResponse(false, 'Npi incorrect.', '', 404);
         }
 
         $age = Carbon::parse($person->birthday)->age;
 
         if ($age < 18) {
-            return self::apiResponse(false, 'Vous devez avoir au moins 18ans pour créer un compte', '', 404);
+            return ResponseApiController::apiResponse(false, 'Vous devez avoir au moins 18ans pour créer un compte', '', 404);
         }
 
         $user = User::where('npi', $request->npi)->first();
@@ -79,11 +74,11 @@ class AuthApiController extends Controller
                     'password' => Hash::make($request->password),
                 ]);
                 $user->assignRole('user');
-                return self::apiResponse(true, 'Compte créer avec succès', '', 201);
+                return ResponseApiController::apiResponse(true, 'Compte créer avec succès', '', 201);
             }
         }
 
-        return self::apiResponse(false, "L'utilisateur existe déjà", '', 406);
+        return ResponseApiController::apiResponse(false, "L'utilisateur existe déjà", '', 406);
     }
 
     /**
@@ -115,10 +110,11 @@ class AuthApiController extends Controller
         if (Auth::attempt($credentials)) {
             $user = User::find(Auth::user()->id);
             $token = $user->createToken($request->email);
-            return self::apiResponse(true, 'Connexion réussie', $token->plainTextToken);
+            return ResponseApiController::apiResponse(true, 'Connexion réussie', $token->plainTextToken);
         }
-        return self::apiResponse(false, 'Identifiants incorrects', '');
+        return ResponseApiController::apiResponse(false, 'Identifiants incorrects', '');
     }
+
 
     /**
      * Log out a user.
@@ -139,6 +135,115 @@ class AuthApiController extends Controller
         $user = User::where('npi', $request->npi)->first();
         $user->tokens()->delete();
 
-        return self::apiResponse(true, 'Déconnexion réussie', '', 201);
+        return ResponseApiController::apiResponse(true, 'Déconnexion réussie', '', 201);
     }
+
+    /**
+     * Send reset password Otp.
+     *
+     * This endpoint send reset password Otp to user email.
+     *
+     * @group Authentication
+     * @bodyParam email string required The email address of the user. Example: user@example.com
+     * @response 200 {
+     *   "success": true,
+     *   "message": "OTP de réinitialisation de mot de passe envoyé avec succès",
+     *   "body": null
+     * }
+     */
+    public function sendOtp(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|exists:users,email',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $email = $request->email;
+
+        // Générer un OTP
+        $otp = rand(100000, 999999);
+
+        // Stocker l'OTP
+        PasswordReset::updateOrCreate(
+            ['email' => $email],
+            [
+                'otp' => $otp,
+                'expires_at' => Carbon::now()->addMinutes(10), // OTP valable pendant 10 minutes
+            ]
+        );
+
+        // Envoyer l'OTP par email
+        Mail::raw("Votre code OTP de réinitialisation de mot de passe est : $otp. Ce code expire dans 10 minutes.", function ($message) use ($email) {
+            $message->to($email)
+                ->subject('Réinitialisation de mot de passe');
+        });
+
+        return ResponseApiController::apiResponse(true, "OTP de réinitialisation de mot de passe envoyé avec succès");
+    }
+
+    /**
+     * Reset password.
+     *
+     * This endpoint reset user password.
+     *
+     * @group Authentication
+     * @bodyParam email string required The email address of the user. Example: user@example.com
+     * @bodyParam otp numeric required
+     * @bodyParam password string required minimum six characters
+     * @bodyParam password_confirmation string required equal to password
+     * @response 200 {
+     *   "success": true,
+     *   "message": "Mot de passe réinitialisé avec succès",
+     *   "body": null
+     * }
+     * @response 400 {
+     *   "success": false,
+     *   "message": "OTP invalide ou expiré.",
+     *   "body": null
+     * }
+     * @response 400 {
+     *   "success": false,
+     *   "message": "OTP expiré.",
+     *   "body": null
+     * }
+     */
+    public function resetPassword(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|exists:users,email',
+            'otp' => 'required|numeric',
+            'password' => 'required|min:6|confirmed',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $passwordReset = PasswordReset::where('email', $request->email)
+            ->where('otp', $request->otp)
+            ->first();
+
+        if (!$passwordReset) {
+            return ResponseApiController::apiResponse(false, 'OTP invalide ou expiré.', 400);
+        }
+
+        // Vérifier si l'OTP a expiré
+        if (Carbon::now()->greaterThan($passwordReset->expires_at)) {
+            return ResponseApiController::apiResponse(false,'OTP expiré.', [], 400);
+        }
+
+        // Réinitialiser le mot de passe
+        $user = User::where('email', $request->email)->first();
+        $user->password = bcrypt($request->password);
+        $user->save();
+
+        // Supprimer l'OTP
+        $passwordReset->delete();
+
+        return ResponseApiController::apiResponse(true,'Mot de passe réinitialisé avec succès');
+    }
+
 }

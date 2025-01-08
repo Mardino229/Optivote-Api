@@ -28,11 +28,11 @@ class ElectionRequest extends FormRequest
         ];
     }
 
-    public function messages()
-    {
-        return [
-            'start_date.after' => 'La date de début doit être postérieure à aujourd’hui.',
-            'end_date.after' => 'La date de fin doit être postérieure à la date de début.',
-        ];
-    }
+//    public function messages()
+//    {
+//        return [
+//            'start_date.after' => 'La date de début doit être postérieure à aujourd’hui.',
+//            'end_date.after' => 'La date de fin doit être postérieure à la date de début.',
+//        ];
+//    }
 }

@@ -140,20 +140,9 @@ class ElectionController extends Controller
      *   "body": [erreur de validation]
      * }
      */
-    public function store(Request $request)
+    public function store(ElectionRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'start_date' => 'required|date|after:today',
-            'end_date' => 'required|date|after_or_equal:start_date',
-        ], [
-            'start_date.after' => 'La date de début doit être postérieure à aujourd’hui.',
-            'end_date.after' => 'La date de fin doit être postérieure à la date de début.',
-        ]);
-        if ($validator->fails()) {
-            return ResponseApiController::apiResponse(false,'Validation des données échouée.',
-                $validator->errors(), 400);
-        }
+
         $election = Election::create($request->all());
         return ResponseApiController::apiResponse(true, 'Election created successfully', $election, 201);
     }

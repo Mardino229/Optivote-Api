@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Laravel Documentation</title>
+    <title>Optivote Documentation</title>
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
 
@@ -79,6 +79,12 @@
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="authentication-POSTapi-logout">
                                 <a href="#authentication-POSTapi-logout">Log out a user.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="authentication-POSTapi-password-send-otp">
+                                <a href="#authentication-POSTapi-password-send-otp">Send reset password Otp.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="authentication-POSTapi-password-reset">
+                                <a href="#authentication-POSTapi-password-reset">Reset password.</a>
                             </li>
                                                                         </ul>
                             </ul>
@@ -183,7 +189,7 @@
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: January 5, 2025</li>
+        <li>Last updated: January 7, 2025</li>
     </ul>
 </div>
 
@@ -225,7 +231,7 @@ The user must provide their NPI, email, and password.</p>
     --data "{
     \"npi\": 123456789,
     \"email\": \"user@example.com\",
-    \"password\": \".B%LFVr\\\\pl\"
+    \"password\": \"^)mfH0Q{\"
 }"
 </code></pre></div>
 
@@ -243,7 +249,7 @@ const headers = {
 let body = {
     "npi": 123456789,
     "email": "user@example.com",
-    "password": ".B%LFVr\\pl"
+    "password": "^)mfH0Q{"
 };
 
 fetch(url, {
@@ -387,10 +393,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="password"                data-endpoint="POSTapi-register"
-               value=".B%LFVr\pl"
+               value="^)mfH0Q{"
                data-component="body">
     <br>
-<p>The password for the new account. Minimum length: 8 characters. Example: <code>.B%LFVr\pl</code></p>
+<p>The password for the new account. Minimum length: 8 characters. Example: <code>^)mfH0Q{</code></p>
         </div>
         </form>
 
@@ -412,7 +418,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Accept: application/json" \
     --data "{
     \"email\": \"user@example.com\",
-    \"password\": \"CRo,p;btgiXM#7p~BeU\"
+    \"password\": \")x\\/k2f)\\/9*\\\\m{\"
 }"
 </code></pre></div>
 
@@ -429,7 +435,7 @@ const headers = {
 
 let body = {
     "email": "user@example.com",
-    "password": "CRo,p;btgiXM#7p~BeU"
+    "password": ")x\/k2f)\/9*\\m{"
 };
 
 fetch(url, {
@@ -551,10 +557,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="password"                data-endpoint="POSTapi-login"
-               value="CRo,p;btgiXM#7p~BeU"
+               value=")x/k2f)/9*\m{"
                data-component="body">
     <br>
-<p>The password of the user. Example: <code>CRo,p;btgiXM#7p~BeU</code></p>
+<p>The password of the user. Example: <code>)x/k2f)/9*\m{</code></p>
         </div>
         </form>
 
@@ -695,6 +701,347 @@ You can check the Dev Tools console for debugging information.</code></pre>
                data-component="body">
     <br>
 <p>The NPI of the user. Example: <code>115586654</code></p>
+        </div>
+        </form>
+
+                    <h2 id="authentication-POSTapi-password-send-otp">Send reset password Otp.</h2>
+
+<p>
+</p>
+
+<p>This endpoint send reset password Otp to user email.</p>
+
+<span id="example-requests-POSTapi-password-send-otp">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost/api/password/send-otp" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"email\": \"user@example.com\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/password/send-otp"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "email": "user@example.com"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-password-send-otp">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;message&quot;: &quot;OTP de r&eacute;initialisation de mot de passe envoy&eacute; avec succ&egrave;s&quot;,
+    &quot;body&quot;: null
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-password-send-otp" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-password-send-otp"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-password-send-otp"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-password-send-otp" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-password-send-otp">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-password-send-otp" data-method="POST"
+      data-path="api/password/send-otp"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-password-send-otp', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-password-send-otp"
+                    onclick="tryItOut('POSTapi-password-send-otp');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-password-send-otp"
+                    onclick="cancelTryOut('POSTapi-password-send-otp');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-password-send-otp"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/password/send-otp</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-password-send-otp"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-password-send-otp"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="email"                data-endpoint="POSTapi-password-send-otp"
+               value="user@example.com"
+               data-component="body">
+    <br>
+<p>The email address of the user. Example: <code>user@example.com</code></p>
+        </div>
+        </form>
+
+                    <h2 id="authentication-POSTapi-password-reset">Reset password.</h2>
+
+<p>
+</p>
+
+<p>This endpoint reset user password.</p>
+
+<span id="example-requests-POSTapi-password-reset">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost/api/password/reset" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"email\": \"user@example.com\",
+    \"otp\": \"deserunt\",
+    \"password\": \"s@D|\\\\*:}6SSu,xTC@\",
+    \"password_confirmation\": \"consequuntur\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/password/reset"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "email": "user@example.com",
+    "otp": "deserunt",
+    "password": "s@D|\\*:}6SSu,xTC@",
+    "password_confirmation": "consequuntur"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-password-reset">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;message&quot;: &quot;Mot de passe r&eacute;initialis&eacute; avec succ&egrave;s&quot;,
+    &quot;body&quot;: null
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (400):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;OTP invalide ou expir&eacute;.&quot;,
+    &quot;body&quot;: null
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (400):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;OTP expir&eacute;.&quot;,
+    &quot;body&quot;: null
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-password-reset" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-password-reset"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-password-reset"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-password-reset" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-password-reset">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-password-reset" data-method="POST"
+      data-path="api/password/reset"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-password-reset', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-password-reset"
+                    onclick="tryItOut('POSTapi-password-reset');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-password-reset"
+                    onclick="cancelTryOut('POSTapi-password-reset');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-password-reset"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/password/reset</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-password-reset"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-password-reset"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="email"                data-endpoint="POSTapi-password-reset"
+               value="user@example.com"
+               data-component="body">
+    <br>
+<p>The email address of the user. Example: <code>user@example.com</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>otp</code></b>&nbsp;&nbsp;
+<small>numeric</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="otp"                data-endpoint="POSTapi-password-reset"
+               value="deserunt"
+               data-component="body">
+    <br>
+<p>Example: <code>deserunt</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="password"                data-endpoint="POSTapi-password-reset"
+               value="s@D|\*:}6SSu,xTC@"
+               data-component="body">
+    <br>
+<p>minimum six characters Example: <code>s@D|\*:}6SSu,xTC@</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>password_confirmation</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="password_confirmation"                data-endpoint="POSTapi-password-reset"
+               value="consequuntur"
+               data-component="body">
+    <br>
+<p>equal to password Example: <code>consequuntur</code></p>
         </div>
         </form>
 
@@ -1021,8 +1368,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "election_id=1"\
     --form "description=Une bonne description"\
     --form "name=John Doe"\
-    --form "image=@C:\Users\hp ProBook 450 G8\AppData\Local\Temp\phpF094.tmp" \
-    --form "photo=@C:\Users\hp ProBook 450 G8\AppData\Local\Temp\phpF095.tmp" </code></pre></div>
+    --form "image=@C:\Users\hp ProBook 450 G8\AppData\Local\Temp\phpA330.tmp" \
+    --form "photo=@C:\Users\hp ProBook 450 G8\AppData\Local\Temp\phpA3AE.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -1228,7 +1575,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>C:\Users\hp ProBook 450 G8\AppData\Local\Temp\phpF094.tmp</code></p>
+<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>C:\Users\hp ProBook 450 G8\AppData\Local\Temp\phpA330.tmp</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
@@ -1250,7 +1597,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>The photo of the candidate (optional). Example: <code>C:\Users\hp ProBook 450 G8\AppData\Local\Temp\phpF095.tmp</code></p>
+<p>The photo of the candidate (optional). Example: <code>C:\Users\hp ProBook 450 G8\AppData\Local\Temp\phpA3AE.tmp</code></p>
         </div>
         </form>
 
@@ -1274,8 +1621,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "election_id=1"\
     --form "description=Une petite description"\
     --form "name=John Doe"\
-    --form "image=@C:\Users\hp ProBook 450 G8\AppData\Local\Temp\phpF0A6.tmp" \
-    --form "photo=@C:\Users\hp ProBook 450 G8\AppData\Local\Temp\phpF0A7.tmp" </code></pre></div>
+    --form "image=@C:\Users\hp ProBook 450 G8\AppData\Local\Temp\phpA3AF.tmp" \
+    --form "photo=@C:\Users\hp ProBook 450 G8\AppData\Local\Temp\phpA3B0.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -1458,7 +1805,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>C:\Users\hp ProBook 450 G8\AppData\Local\Temp\phpF0A6.tmp</code></p>
+<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>C:\Users\hp ProBook 450 G8\AppData\Local\Temp\phpA3AF.tmp</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
@@ -1480,7 +1827,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>The photo of the candidate (optional). Example: <code>C:\Users\hp ProBook 450 G8\AppData\Local\Temp\phpF0A7.tmp</code></p>
+<p>The photo of the candidate (optional). Example: <code>C:\Users\hp ProBook 450 G8\AppData\Local\Temp\phpA3B0.tmp</code></p>
         </div>
         </form>
 
@@ -2835,7 +3182,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"start_date\": \"2025-01-05T14:30:09\",
+    \"start_date\": \"2025-01-07T21:20:49\",
     \"end_date\": \"2024-01-10\"
 }"
 </code></pre></div>
@@ -2852,7 +3199,7 @@ const headers = {
 };
 
 let body = {
-    "start_date": "2025-01-05T14:30:09",
+    "start_date": "2025-01-07T21:20:49",
     "end_date": "2024-01-10"
 };
 
@@ -3010,10 +3357,10 @@ required The start date of the election. Example: <code>2024</code></p>
  &nbsp;
                 <input type="text" style="display: none"
                               name="start_date"                data-endpoint="POSTapi-second_tour--election_id-"
-               value="2025-01-05T14:30:09"
+               value="2025-01-07T21:20:49"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2025-01-05T14:30:09</code></p>
+<p>Must be a valid date. Example: <code>2025-01-07T21:20:49</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>end_date</code></b>&nbsp;&nbsp;
@@ -3174,14 +3521,14 @@ Si un des candidats a un pourcentage supérieur à 50 %, le statut de l'électio
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/resultats/4" \
+    --get "http://localhost/api/resultats/18" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/resultats/4"
+    "http://localhost/api/resultats/18"
 );
 
 const headers = {
@@ -3314,10 +3661,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="election_id"                data-endpoint="GETapi-resultats--election_id-"
-               value="4"
+               value="18"
                data-component="url">
     <br>
-<p>L'ID de l'élection dont on veut les résultats. Exemple : 1 Example: <code>4</code></p>
+<p>L'ID de l'élection dont on veut les résultats. Exemple : 1 Example: <code>18</code></p>
             </div>
                     </form>
 
@@ -3635,7 +3982,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"user_id\": 11,
+    \"user_id\": 9,
     \"candidat_id\": 5,
     \"election_id\": 3,
     \"voter_id\": 2
@@ -3654,7 +4001,7 @@ const headers = {
 };
 
 let body = {
-    "user_id": 11,
+    "user_id": 9,
     "candidat_id": 5,
     "election_id": 3,
     "voter_id": 2
@@ -3786,10 +4133,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="user_id"                data-endpoint="POSTapi-vote"
-               value="11"
+               value="9"
                data-component="body">
     <br>
-<p>The <code>id</code> of an existing record in the users table. Example: <code>11</code></p>
+<p>The <code>id</code> of an existing record in the users table. Example: <code>9</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>candidat_id</code></b>&nbsp;&nbsp;

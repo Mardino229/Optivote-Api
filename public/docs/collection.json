@@ -9,8 +9,8 @@
         }
     ],
     "info": {
-        "name": "Laravel",
-        "_postman_id": "f6439198-1c68-40f4-8147-f8dd1f505a5e",
+        "name": "Optivote",
+        "_postman_id": "0a4eb65d-ebd0-4996-ba15-8b01ca620b9a",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -41,7 +41,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"npi\":123456789,\"email\":\"user@example.com\",\"password\":\".B%LFVr\\\\pl\"}"
+                            "raw": "{\"npi\":123456789,\"email\":\"user@example.com\",\"password\":\"^)mfH0Q{\"}"
                         },
                         "description": "This endpoint allows users to create a new account.\nThe user must provide their NPI, email, and password.",
                         "auth": {
@@ -91,7 +91,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"email\":\"user@example.com\",\"password\":\"CRo,p;btgiXM#7p~BeU\"}"
+                            "raw": "{\"email\":\"user@example.com\",\"password\":\")x\\\/k2f)\\\/9*\\\\m{\"}"
                         },
                         "description": "This endpoint allows a user to log in with their email and password.",
                         "auth": {
@@ -147,6 +147,94 @@
                             "header": [],
                             "code": 201,
                             "body": "{\n  \"success\": true,\n  \"message\": \"D\u00e9connexion r\u00e9ussie\",\n  \"body\": \"\"\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Send reset password Otp.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/password\/send-otp",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/password\/send-otp"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"email\":\"user@example.com\"}"
+                        },
+                        "description": "This endpoint send reset password Otp to user email.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"success\": true,\n  \"message\": \"OTP de r\u00e9initialisation de mot de passe envoy\u00e9 avec succ\u00e8s\",\n  \"body\": null\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Reset password.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/password\/reset",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/password\/reset"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"email\":\"user@example.com\",\"otp\":\"deserunt\",\"password\":\"s@D|\\\\*:}6SSu,xTC@\",\"password_confirmation\":\"consequuntur\"}"
+                        },
+                        "description": "This endpoint reset user password.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"success\": true,\n  \"message\": \"Mot de passe r\u00e9initialis\u00e9 avec succ\u00e8s\",\n  \"body\": null\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 400,
+                            "body": "{\n  \"success\": false,\n  \"message\": \"OTP invalide ou expir\u00e9.\",\n  \"body\": null\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 400,
+                            "body": "{\n  \"success\": false,\n  \"message\": \"OTP expir\u00e9.\",\n  \"body\": null\n}",
                             "name": ""
                         }
                     ]
@@ -864,7 +952,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"start_date\":\"2025-01-05T14:30:09\",\"end_date\":\"2024-01-10\"}"
+                            "raw": "{\"start_date\":\"2025-01-07T21:20:49\",\"end_date\":\"2024-01-10\"}"
                         },
                         "description": "",
                         "auth": {
@@ -976,7 +1064,7 @@
                                 {
                                     "id": "election_id",
                                     "key": "election_id",
-                                    "value": "4",
+                                    "value": "18",
                                     "description": "L'ID de l'\u00e9lection dont on veut les r\u00e9sultats. Exemple : 1"
                                 }
                             ]
@@ -1139,7 +1227,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"user_id\":11,\"candidat_id\":5,\"election_id\":3,\"voter_id\":2}"
+                            "raw": "{\"user_id\":9,\"candidat_id\":5,\"election_id\":3,\"voter_id\":2}"
                         },
                         "description": "",
                         "auth": {

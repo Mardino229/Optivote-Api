@@ -50,7 +50,7 @@ endpoints:
         name: password
         description: 'The password for the new account. Minimum length: 8 characters.'
         required: true
-        example: .B%LFVr\pl
+        example: '^)mfH0Q{'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -59,7 +59,7 @@ endpoints:
     cleanBodyParameters:
       npi: 123456789
       email: user@example.com
-      password: .B%LFVr\pl
+      password: '^)mfH0Q{'
     fileParameters: []
     responses:
       -
@@ -136,7 +136,7 @@ endpoints:
         name: password
         description: 'The password of the user.'
         required: true
-        example: 'CRo,p;btgiXM#7p~BeU'
+        example: ')x/k2f)/9*\m{'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -144,7 +144,7 @@ endpoints:
         custom: []
     cleanBodyParameters:
       email: user@example.com
-      password: 'CRo,p;btgiXM#7p~BeU'
+      password: ')x/k2f)/9*\m{'
     fileParameters: []
     responses:
       -
@@ -217,6 +217,165 @@ endpoints:
             "success": true,
             "message": "Déconnexion réussie",
             "body": ""
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/password/send-otp
+    metadata:
+      groupName: Authentication
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Send reset password Otp.'
+      description: 'This endpoint send reset password Otp to user email.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      email:
+        name: email
+        description: 'The email address of the user.'
+        required: true
+        example: user@example.com
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanBodyParameters:
+      email: user@example.com
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "message": "OTP de réinitialisation de mot de passe envoyé avec succès",
+            "body": null
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/password/reset
+    metadata:
+      groupName: Authentication
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Reset password.'
+      description: 'This endpoint reset user password.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      email:
+        name: email
+        description: 'The email address of the user.'
+        required: true
+        example: user@example.com
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      otp:
+        name: otp
+        description: ''
+        required: true
+        example: deserunt
+        type: numeric
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      password:
+        name: password
+        description: 'minimum six characters'
+        required: true
+        example: 's@D|\*:}6SSu,xTC@'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      password_confirmation:
+        name: password_confirmation
+        description: 'equal to password'
+        required: true
+        example: consequuntur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanBodyParameters:
+      email: user@example.com
+      otp: deserunt
+      password: 's@D|\*:}6SSu,xTC@'
+      password_confirmation: consequuntur
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "message": "Mot de passe réinitialisé avec succès",
+            "body": null
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 400
+        content: |-
+          {
+            "success": false,
+            "message": "OTP invalide ou expiré.",
+            "body": null
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 400
+        content: |-
+          {
+            "success": false,
+            "message": "OTP expiré.",
+            "body": null
           }
         headers: []
         description: ''

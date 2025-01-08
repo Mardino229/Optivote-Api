@@ -26,14 +26,14 @@ endpoints:
         name: election_id
         description: "L'ID de l'élection dont on veut les résultats. Exemple : 1"
         required: true
-        example: 4
+        example: 18
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanUrlParameters:
-      election_id: 4
+      election_id: 18
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
