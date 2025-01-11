@@ -40,5 +40,5 @@ Cette application est une API développée avec Laravel pour gérer les électio
     php artisan scribe:generate
     ```
 
-Accédez à la documentation de l'api à l'addresse : http://127.0.0.1:8000/docs
+Accédez à la documentation de l'api à l'addresse : http://127.0.0.1:8000/docs .
 
