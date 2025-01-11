@@ -33,8 +33,5 @@ jobs:
         script: |
           cd ~/Optivote-Api
           cp .env.example .env
-          php artisan key:generate
-          php artisan db:seed
-          php artisan cache:clear
-          php artisan migrate
-          php artisan scribe:generate
+          chmod +x run.sh
+          ./run.sh
