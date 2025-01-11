@@ -1,0 +1,41 @@
+name: "CI-CD Workflow"
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+
+    - name: Copy dist to VPS
+      uses: appleboy/scp-action@v0.1.7
+      env:
+        HOST: ${{ secrets.HOST }}
+        USERNAME: ${{ secrets.USERNAME }}
+        KEY: ${{ secrets.SSH_KEY }}
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.SSH_KEY }}
+        source: "."
+        target: "~/Project-Management-App"
+    - name: Install and start application
+      uses: appleboy/ssh-action@v1.2.0
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.SSH_KEY }}
+        script: |
+          cd ~/Optivote-Api
+          cp .env.example .env
+          php artisan key:generate
+          php artisan db:seed
+          php artisan cache:clear
+          php artisan migrate
+          php artisan scribe:generate
+          pm2 start "php artisan serve --host=0.0.0.0 --port=8002" --name optivote
