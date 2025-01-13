@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Optivote",
-        "_postman_id": "0a4eb65d-ebd0-4996-ba15-8b01ca620b9a",
+        "_postman_id": "a2dcbf09-7cc6-4352-b598-b813434d586b",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -41,7 +41,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"npi\":123456789,\"email\":\"user@example.com\",\"password\":\"^)mfH0Q{\"}"
+                            "raw": "{\"npi\":123456789,\"email\":\"user@example.com\",\"password\":\">qxrV0#K7F]Y&xmfy\"}"
                         },
                         "description": "This endpoint allows users to create a new account.\nThe user must provide their NPI, email, and password.",
                         "auth": {
@@ -91,7 +91,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"email\":\"user@example.com\",\"password\":\")x\\\/k2f)\\\/9*\\\\m{\"}"
+                            "raw": "{\"email\":\"user@example.com\",\"password\":\"yKzwsG1r!A*72hf[m\"}"
                         },
                         "description": "This endpoint allows a user to log in with their email and password.",
                         "auth": {
@@ -102,7 +102,7 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\n  \"success\": true,\n  \"message\": \"Connexion r\u00e9ussie\",\n  \"body\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...\"\n}",
+                            "body": "{\n  \"success\": true,\n  \"message\": \"Connexion r\u00e9ussie\",\n  \"body\": {\n     \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9\",\n     \"role\": \"admin\",\n     \"npi\": 1952368744,\n  }\n}",
                             "name": ""
                         },
                         {
@@ -211,7 +211,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"email\":\"user@example.com\",\"otp\":\"deserunt\",\"password\":\"s@D|\\\\*:}6SSu,xTC@\",\"password_confirmation\":\"consequuntur\"}"
+                            "raw": "{\"email\":\"user@example.com\",\"otp\":\"magni\",\"password\":\"c.wDf}]Kg(Ye4rl\",\"password_confirmation\":\"repellendus\"}"
                         },
                         "description": "This endpoint reset user password.",
                         "auth": {
@@ -283,7 +283,7 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\n  \"success\": true,\n  \"message\": \"\",\n  \"body\": [\n    {\n      \"id\": 1,\n      \"name\": \"John Doe\",\n      \"npi\": \"123456789\",\n      \"election_id\": 1,\n      \"description\": \"Une description du candidat\",\n      \"photo\": \"candidats\/photos\/johndoe.jpg\"\n    }\n  ]\n}",
+                            "body": "{\n  \"success\": true,\n  \"message\": \"\",\n  \"body\": [\n    {\n      \"id\": 1,\n      \"name\": \"John Doe\",\n      \"npi\": 123456789,\n      \"election_id\": 1,\n      \"description\": \"Une description du candidat\",\n      \"photo\": \"candidats\/photos\/johndoe.jpg\"\n    }\n  ]\n}",
                             "name": ""
                         },
                         {
@@ -332,7 +332,7 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\n  \"success\": true,\n  \"message\": \"\",\n  \"body\": {\n    \"id\": 1,\n    \"name\": \"John Doe\",\n    \"npi\": \"123456789\",\n    \"election_id\": 1,\n    \"photo\": \"candidats\/photos\/johndoe.jpg\"\n  }\n}",
+                            "body": "{\n  \"success\": true,\n  \"message\": \"\",\n  \"body\": {\n    \"id\": 1,\n    \"name\": \"John Doe\",\n    \"npi\": 123456789,\n    \"election_id\": 1,\n    \"photo\": \"candidats\/photos\/johndoe.jpg\"\n  }\n}",
                             "name": ""
                         },
                         {
@@ -419,7 +419,7 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\n  \"success\": true,\n  \"message\": \"Candidat mis \u00e0 jour avec succ\u00e8s\",\n  \"body\": {\n    \"id\": 1,\n    \"name\": \"John Doe\",\n    \"description\": \"Une bonne description\",\n    \"npi\": \"123456789\",\n    \"election_id\": 1,\n    \"photo\": \"candidats\/photos\/johndoe_updated.jpg\"\n  }\n}",
+                            "body": "{\n  \"success\": true,\n  \"message\": \"Candidat mis \u00e0 jour avec succ\u00e8s\",\n  \"body\": {\n    \"id\": 1,\n    \"name\": \"John Doe\",\n    \"description\": \"Une bonne description\",\n    \"npi\": 123456789,\n    \"election_id\": 1,\n    \"photo\": \"candidats\/photos\/johndoe_updated.jpg\"\n  }\n}",
                             "name": ""
                         },
                         {
@@ -510,7 +510,7 @@
                         {
                             "header": [],
                             "code": 201,
-                            "body": "{\n  \"success\": true,\n  \"message\": \"Candidat ajout\u00e9 avec succ\u00e8s\",\n  \"body\": {\n    \"id\": 1,\n    \"name\": \"John Doe\",\n    \"description\": \"Une bonne description\",\n    \"npi\": \"123456789\",\n    \"election_id\": 1,\n    \"photo\": \"candidats\/photos\/johndoe.jpg\"\n  }\n}",
+                            "body": "{\n  \"success\": true,\n  \"message\": \"Candidat ajout\u00e9 avec succ\u00e8s\",\n  \"body\": {\n    \"id\": 1,\n    \"name\": \"John Doe\",\n    \"description\": \"Une bonne description\",\n    \"npi\": 123456789,\n    \"election_id\": 1,\n    \"photo\": \"candidats\/photos\/johndoe.jpg\"\n  }\n}",
                             "name": ""
                         },
                         {
@@ -934,8 +934,14 @@
                                 {
                                     "id": "election_id",
                                     "key": "election_id",
-                                    "value": "2024",
-                                    "description": "The ID of the election. Example: 1\nrequired The start date of the election."
+                                    "value": "adipisci",
+                                    "description": "The ID of the election."
+                                },
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "The ID of the election."
                                 }
                             ]
                         },
@@ -952,7 +958,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"start_date\":\"2025-01-07T21:20:49\",\"end_date\":\"2024-01-10\"}"
+                            "raw": "{\"start_date\":\"2025-01-13T16:35:51\",\"end_date\":\"2054-11-04\",\"required\":\"2024-01-10\"}"
                         },
                         "description": "",
                         "auth": {
@@ -1064,7 +1070,7 @@
                                 {
                                     "id": "election_id",
                                     "key": "election_id",
-                                    "value": "18",
+                                    "value": "7",
                                     "description": "L'ID de l'\u00e9lection dont on veut les r\u00e9sultats. Exemple : 1"
                                 }
                             ]
@@ -1227,7 +1233,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"user_id\":9,\"candidat_id\":5,\"election_id\":3,\"voter_id\":2}"
+                            "raw": "{\"user_id\":6,\"candidat_id\":5,\"election_id\":3,\"voter_id\":2}"
                         },
                         "description": "",
                         "auth": {

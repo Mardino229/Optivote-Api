@@ -189,7 +189,7 @@
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: January 7, 2025</li>
+        <li>Last updated: January 13, 2025</li>
     </ul>
 </div>
 
@@ -231,7 +231,7 @@ The user must provide their NPI, email, and password.</p>
     --data "{
     \"npi\": 123456789,
     \"email\": \"user@example.com\",
-    \"password\": \"^)mfH0Q{\"
+    \"password\": \"&gt;qxrV0#K7F]Y&amp;xmfy\"
 }"
 </code></pre></div>
 
@@ -249,7 +249,7 @@ const headers = {
 let body = {
     "npi": 123456789,
     "email": "user@example.com",
-    "password": "^)mfH0Q{"
+    "password": "&gt;qxrV0#K7F]Y&amp;xmfy"
 };
 
 fetch(url, {
@@ -393,10 +393,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="password"                data-endpoint="POSTapi-register"
-               value="^)mfH0Q{"
+               value=">qxrV0#K7F]Y&xmfy"
                data-component="body">
     <br>
-<p>The password for the new account. Minimum length: 8 characters. Example: <code>^)mfH0Q{</code></p>
+<p>The password for the new account. Minimum length: 8 characters. Example: <code>&gt;qxrV0#K7F]Y&amp;xmfy</code></p>
         </div>
         </form>
 
@@ -418,7 +418,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Accept: application/json" \
     --data "{
     \"email\": \"user@example.com\",
-    \"password\": \")x\\/k2f)\\/9*\\\\m{\"
+    \"password\": \"yKzwsG1r!A*72hf[m\"
 }"
 </code></pre></div>
 
@@ -435,7 +435,7 @@ const headers = {
 
 let body = {
     "email": "user@example.com",
-    "password": ")x\/k2f)\/9*\\m{"
+    "password": "yKzwsG1r!A*72hf[m"
 };
 
 fetch(url, {
@@ -453,9 +453,13 @@ fetch(url, {
                 <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;success&quot;: true,
-    &quot;message&quot;: &quot;Connexion r&eacute;ussie&quot;,
-    &quot;body&quot;: &quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...&quot;
+  &quot;success&quot;: true,
+  &quot;message&quot;: &quot;Connexion r&eacute;ussie&quot;,
+  &quot;body&quot;: {
+     &quot;accessToken&quot;: &quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9&quot;,
+     &quot;role&quot;: &quot;admin&quot;,
+     &quot;npi&quot;: 1952368744,
+  }
 }</code>
  </pre>
             <blockquote>
@@ -557,10 +561,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="password"                data-endpoint="POSTapi-login"
-               value=")x/k2f)/9*\m{"
+               value="yKzwsG1r!A*72hf[m"
                data-component="body">
     <br>
-<p>The password of the user. Example: <code>)x/k2f)/9*\m{</code></p>
+<p>The password of the user. Example: <code>yKzwsG1r!A*72hf[m</code></p>
         </div>
         </form>
 
@@ -862,9 +866,9 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Accept: application/json" \
     --data "{
     \"email\": \"user@example.com\",
-    \"otp\": \"deserunt\",
-    \"password\": \"s@D|\\\\*:}6SSu,xTC@\",
-    \"password_confirmation\": \"consequuntur\"
+    \"otp\": \"magni\",
+    \"password\": \"c.wDf}]Kg(Ye4rl\",
+    \"password_confirmation\": \"repellendus\"
 }"
 </code></pre></div>
 
@@ -881,9 +885,9 @@ const headers = {
 
 let body = {
     "email": "user@example.com",
-    "otp": "deserunt",
-    "password": "s@D|\\*:}6SSu,xTC@",
-    "password_confirmation": "consequuntur"
+    "otp": "magni",
+    "password": "c.wDf}]Kg(Ye4rl",
+    "password_confirmation": "repellendus"
 };
 
 fetch(url, {
@@ -1016,10 +1020,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="otp"                data-endpoint="POSTapi-password-reset"
-               value="deserunt"
+               value="magni"
                data-component="body">
     <br>
-<p>Example: <code>deserunt</code></p>
+<p>Example: <code>magni</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
@@ -1027,10 +1031,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="password"                data-endpoint="POSTapi-password-reset"
-               value="s@D|\*:}6SSu,xTC@"
+               value="c.wDf}]Kg(Ye4rl"
                data-component="body">
     <br>
-<p>minimum six characters Example: <code>s@D|\*:}6SSu,xTC@</code></p>
+<p>minimum six characters Example: <code>c.wDf}]Kg(Ye4rl</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>password_confirmation</code></b>&nbsp;&nbsp;
@@ -1038,10 +1042,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="password_confirmation"                data-endpoint="POSTapi-password-reset"
-               value="consequuntur"
+               value="repellendus"
                data-component="body">
     <br>
-<p>equal to password Example: <code>consequuntur</code></p>
+<p>equal to password Example: <code>repellendus</code></p>
         </div>
         </form>
 
@@ -1097,7 +1101,7 @@ fetch(url, {
         {
             &quot;id&quot;: 1,
             &quot;name&quot;: &quot;John Doe&quot;,
-            &quot;npi&quot;: &quot;123456789&quot;,
+            &quot;npi&quot;: 123456789,
             &quot;election_id&quot;: 1,
             &quot;description&quot;: &quot;Une description du candidat&quot;,
             &quot;photo&quot;: &quot;candidats/photos/johndoe.jpg&quot;
@@ -1247,7 +1251,7 @@ fetch(url, {
     &quot;body&quot;: {
         &quot;id&quot;: 1,
         &quot;name&quot;: &quot;John Doe&quot;,
-        &quot;npi&quot;: &quot;123456789&quot;,
+        &quot;npi&quot;: 123456789,
         &quot;election_id&quot;: 1,
         &quot;photo&quot;: &quot;candidats/photos/johndoe.jpg&quot;
     }
@@ -1368,8 +1372,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "election_id=1"\
     --form "description=Une bonne description"\
     --form "name=John Doe"\
-    --form "image=@C:\Users\hp ProBook 450 G8\AppData\Local\Temp\phpA330.tmp" \
-    --form "photo=@C:\Users\hp ProBook 450 G8\AppData\Local\Temp\phpA3AE.tmp" </code></pre></div>
+    --form "image=@C:\Users\hp ProBook 450 G8\AppData\Local\Temp\phpEBCE.tmp" \
+    --form "photo=@C:\Users\hp ProBook 450 G8\AppData\Local\Temp\phpEBCF.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -1411,7 +1415,7 @@ fetch(url, {
         &quot;id&quot;: 1,
         &quot;name&quot;: &quot;John Doe&quot;,
         &quot;description&quot;: &quot;Une bonne description&quot;,
-        &quot;npi&quot;: &quot;123456789&quot;,
+        &quot;npi&quot;: 123456789,
         &quot;election_id&quot;: 1,
         &quot;photo&quot;: &quot;candidats/photos/johndoe_updated.jpg&quot;
     }
@@ -1575,7 +1579,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>C:\Users\hp ProBook 450 G8\AppData\Local\Temp\phpA330.tmp</code></p>
+<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>C:\Users\hp ProBook 450 G8\AppData\Local\Temp\phpEBCE.tmp</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
@@ -1597,7 +1601,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>The photo of the candidate (optional). Example: <code>C:\Users\hp ProBook 450 G8\AppData\Local\Temp\phpA3AE.tmp</code></p>
+<p>The photo of the candidate (optional). Example: <code>C:\Users\hp ProBook 450 G8\AppData\Local\Temp\phpEBCF.tmp</code></p>
         </div>
         </form>
 
@@ -1621,8 +1625,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "election_id=1"\
     --form "description=Une petite description"\
     --form "name=John Doe"\
-    --form "image=@C:\Users\hp ProBook 450 G8\AppData\Local\Temp\phpA3AF.tmp" \
-    --form "photo=@C:\Users\hp ProBook 450 G8\AppData\Local\Temp\phpA3B0.tmp" </code></pre></div>
+    --form "image=@C:\Users\hp ProBook 450 G8\AppData\Local\Temp\phpEBD0.tmp" \
+    --form "photo=@C:\Users\hp ProBook 450 G8\AppData\Local\Temp\phpEBD1.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -1664,7 +1668,7 @@ fetch(url, {
         &quot;id&quot;: 1,
         &quot;name&quot;: &quot;John Doe&quot;,
         &quot;description&quot;: &quot;Une bonne description&quot;,
-        &quot;npi&quot;: &quot;123456789&quot;,
+        &quot;npi&quot;: 123456789,
         &quot;election_id&quot;: 1,
         &quot;photo&quot;: &quot;candidats/photos/johndoe.jpg&quot;
     }
@@ -1805,7 +1809,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>C:\Users\hp ProBook 450 G8\AppData\Local\Temp\phpA3AF.tmp</code></p>
+<p>Must be an image. Must not be greater than 2048 kilobytes. Example: <code>C:\Users\hp ProBook 450 G8\AppData\Local\Temp\phpEBD0.tmp</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
@@ -1827,7 +1831,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>The photo of the candidate (optional). Example: <code>C:\Users\hp ProBook 450 G8\AppData\Local\Temp\phpA3B0.tmp</code></p>
+<p>The photo of the candidate (optional). Example: <code>C:\Users\hp ProBook 450 G8\AppData\Local\Temp\phpEBD1.tmp</code></p>
         </div>
         </form>
 
@@ -3178,19 +3182,20 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/second_tour/2024" \
+    "http://localhost/api/second_tour/adipisci" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"start_date\": \"2025-01-07T21:20:49\",
-    \"end_date\": \"2024-01-10\"
+    \"start_date\": \"2025-01-13T16:35:51\",
+    \"end_date\": \"2054-11-04\",
+    \"required\": \"2024-01-10\"
 }"
 </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/second_tour/2024"
+    "http://localhost/api/second_tour/adipisci"
 );
 
 const headers = {
@@ -3199,8 +3204,9 @@ const headers = {
 };
 
 let body = {
-    "start_date": "2025-01-07T21:20:49",
-    "end_date": "2024-01-10"
+    "start_date": "2025-01-13T16:35:51",
+    "end_date": "2054-11-04",
+    "required": "2024-01-10"
 };
 
 fetch(url, {
@@ -3340,15 +3346,25 @@ You can check the Dev Tools console for debugging information.</code></pre>
                         <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>election_id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="election_id"                data-endpoint="POSTapi-second_tour--election_id-"
+               value="adipisci"
+               data-component="url">
+    <br>
+<p>The ID of the election. Example: <code>adipisci</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
 <small>integer</small>&nbsp;
  &nbsp;
                 <input type="number" style="display: none"
-               step="any"               name="election_id"                data-endpoint="POSTapi-second_tour--election_id-"
-               value="2024"
+               step="any"               name="id"                data-endpoint="POSTapi-second_tour--election_id-"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the election. Example: 1
-required The start date of the election. Example: <code>2024</code></p>
+<p>The ID of the election. Example: <code>1</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -3357,21 +3373,32 @@ required The start date of the election. Example: <code>2024</code></p>
  &nbsp;
                 <input type="text" style="display: none"
                               name="start_date"                data-endpoint="POSTapi-second_tour--election_id-"
-               value="2025-01-07T21:20:49"
+               value="2025-01-13T16:35:51"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2025-01-07T21:20:49</code></p>
+<p>Must be a valid date. Example: <code>2025-01-13T16:35:51</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>end_date</code></b>&nbsp;&nbsp;
-<small>date</small>&nbsp;
+<small>string</small>&nbsp;
  &nbsp;
                 <input type="text" style="display: none"
                               name="end_date"                data-endpoint="POSTapi-second_tour--election_id-"
+               value="2054-11-04"
+               data-component="body">
+    <br>
+<p>Must be a valid date. Must be a date after or equal to <code>start_date</code>. Example: <code>2054-11-04</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>required</code></b>&nbsp;&nbsp;
+<small>end_date</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="required"                data-endpoint="POSTapi-second_tour--election_id-"
                value="2024-01-10"
                data-component="body">
     <br>
-<p>The end date of the election. Example: <code>2024-01-10</code></p>
+<p>date required The end date of the election. Example: <code>2024-01-10</code></p>
         </div>
         </form>
 
@@ -3521,14 +3548,14 @@ Si un des candidats a un pourcentage supérieur à 50 %, le statut de l'électio
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/resultats/18" \
+    --get "http://localhost/api/resultats/7" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/resultats/18"
+    "http://localhost/api/resultats/7"
 );
 
 const headers = {
@@ -3661,10 +3688,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="election_id"                data-endpoint="GETapi-resultats--election_id-"
-               value="18"
+               value="7"
                data-component="url">
     <br>
-<p>L'ID de l'élection dont on veut les résultats. Exemple : 1 Example: <code>18</code></p>
+<p>L'ID de l'élection dont on veut les résultats. Exemple : 1 Example: <code>7</code></p>
             </div>
                     </form>
 
@@ -3982,7 +4009,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"user_id\": 9,
+    \"user_id\": 6,
     \"candidat_id\": 5,
     \"election_id\": 3,
     \"voter_id\": 2
@@ -4001,7 +4028,7 @@ const headers = {
 };
 
 let body = {
-    "user_id": 9,
+    "user_id": 6,
     "candidat_id": 5,
     "election_id": 3,
     "voter_id": 2
@@ -4133,10 +4160,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="user_id"                data-endpoint="POSTapi-vote"
-               value="9"
+               value="6"
                data-component="body">
     <br>
-<p>The <code>id</code> of an existing record in the users table. Example: <code>9</code></p>
+<p>The <code>id</code> of an existing record in the users table. Example: <code>6</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>candidat_id</code></b>&nbsp;&nbsp;

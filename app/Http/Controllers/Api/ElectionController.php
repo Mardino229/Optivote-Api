@@ -151,9 +151,9 @@ class ElectionController extends Controller
      * Create a second round of an election.
      *
      * @group Elections
-     * @urlParam election_id integer required The ID of the election. Example: 1
-     * required The start date of the election. Example: 2024-01-01
-     * @bodyParam end_date date required The end date of the election. Example: 2024-01-10
+     * @urlParam id integer required The ID of the election. Example: 1
+     * @bodyParam required The start date of the election. Example: 2024-01-01
+     * @bodyParam required end_date date required The end date of the election. Example: 2024-01-10
      * @response 201 {
      *   "success": true,
      *   "message": "Election du deuxième tour crée avec succès",
@@ -323,9 +323,9 @@ class ElectionController extends Controller
     {
         $election = Election::find($id);
         if ($election ==  null) {
-            return ResponseApiController::apiResponse(false, "Election introuvable", $election , 404);
+            return ResponseApiController::apiResponse(false, "Election introuvable", [] , 404);
         }
         $election->delete();
-        return ResponseApiController::apiResponse(true, 'Election supprimé avec succès', $election);
+        return ResponseApiController::apiResponse(true, 'Election supprimé avec succès');
     }
 }

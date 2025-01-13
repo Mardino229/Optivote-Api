@@ -44,6 +44,12 @@ class AuthApiController extends Controller
      */
     public function create(Request $request)
     {
+        $request->validate([
+            "email" => "required|email",
+            "npi" => "required|integer",
+            "password" => "required|min:8",
+        ]);
+
         $person = Person::where('npi', $request->npi)->first();
 
         if ($person == null) {
@@ -61,11 +67,6 @@ class AuthApiController extends Controller
         if ($user == null) {
             $user = User::where('email', $request->email)->first();
             if ($user == null) {
-                $request->validate([
-                    "email" => "required|email",
-                    "npi" => "required|integer",
-                    "password" => "required|min:8",
-                ]);
                 $user = User::create([
                     'name' => $person->name,
                     'email' => $request->email,
@@ -92,7 +93,11 @@ class AuthApiController extends Controller
      * @response 200 {
      *   "success": true,
      *   "message": "Connexion réussie",
-     *   "body": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+     *   "body": {
+     *      "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9",
+     *      "role": "admin",
+     *      "npi": 1952368744,
+     *   }
      * }
      * @response 401 {
      *   "success": false,
@@ -110,9 +115,13 @@ class AuthApiController extends Controller
         if (Auth::attempt($credentials)) {
             $user = User::find(Auth::user()->id);
             $token = $user->createToken($request->email);
-            return ResponseApiController::apiResponse(true, 'Connexion réussie', $token->plainTextToken);
+            return ResponseApiController::apiResponse(true, 'Connexion réussie', [
+                'accessToken' => $token->plainTextToken,
+                'role' => $user->roles[0]->name,
+                'npi' => $user->npi,
+            ]);
         }
-        return ResponseApiController::apiResponse(false, 'Identifiants incorrects', '');
+        return ResponseApiController::apiResponse(false, 'Identifiants incorrects', '', 404);
     }
 
 

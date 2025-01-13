@@ -9,6 +9,7 @@ class Candidat extends Model
     protected $fillable = [
         'npi',
         'election_id',
+        'name',
         'description',
         'photo',
     ];

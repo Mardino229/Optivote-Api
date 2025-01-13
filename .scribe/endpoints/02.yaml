@@ -541,18 +541,27 @@ endpoints:
     urlParameters:
       election_id:
         name: election_id
-        description: |-
-          The ID of the election. Example: 1
-          required The start date of the election.
+        description: 'The ID of the election.'
         required: true
-        example: 2024
+        example: adipisci
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      id:
+        name: id
+        description: 'The ID of the election.'
+        required: true
+        example: 1
         type: integer
         enumValues: []
         exampleWasSpecified: true
         nullable: false
         custom: []
     cleanUrlParameters:
-      election_id: 2024
+      election_id: adipisci
+      id: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -560,7 +569,7 @@ endpoints:
         name: start_date
         description: 'Must be a valid date.'
         required: true
-        example: '2025-01-07T21:20:49'
+        example: '2025-01-13T16:35:51'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -568,17 +577,28 @@ endpoints:
         custom: []
       end_date:
         name: end_date
-        description: 'The end date of the election.'
+        description: 'Must be a valid date. Must be a date after or equal to <code>start_date</code>.'
         required: true
+        example: '2054-11-04'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      required:
+        name: required
+        description: 'date required The end date of the election.'
+        required: false
         example: '2024-01-10'
-        type: date
+        type: end_date
         enumValues: []
         exampleWasSpecified: true
         nullable: false
         custom: []
     cleanBodyParameters:
-      start_date: '2025-01-07T21:20:49'
-      end_date: '2024-01-10'
+      start_date: '2025-01-13T16:35:51'
+      end_date: '2054-11-04'
+      required: '2024-01-10'
     fileParameters: []
     responses:
       -

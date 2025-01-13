@@ -28,7 +28,7 @@ class CandidatController extends Controller
      *     {
      *       "id": 1,
      *       "name": "John Doe",
-     *       "npi": "123456789",
+     *       "npi": 123456789,
      *       "election_id": 1,
      *       "description": "Une description du candidat",
      *       "photo": "candidats/photos/johndoe.jpg"
@@ -51,6 +51,13 @@ class CandidatController extends Controller
 
         $candidats = Candidat::all()->where('election_id', $election_id);
 
+        $candidats = $candidats->map(function ($candidat) {
+            $candidat->photo = $candidat->photo
+                ? asset('storage/' . $candidat->photo)
+                : null;
+            return $candidat;
+        });
+
         return ResponseApiController::apiResponse(true, "", $candidats);
     }
 
@@ -72,7 +79,7 @@ class CandidatController extends Controller
      *     "id": 1,
      *     "name": "John Doe",
      *     "description": "Une bonne description",
-     *     "npi": "123456789",
+     *     "npi": 123456789,
      *     "election_id": 1,
      *     "photo": "candidats/photos/johndoe.jpg"
      *   }
@@ -104,6 +111,9 @@ class CandidatController extends Controller
             }
 
             $candidat = Candidat::create($candidatData);
+            $name = Person::where('npi', $request->npi)->first()->name;
+            $candidat->name = $name;
+            $candidat->save();
             Resultat::create([
                 'election_id' => $election->id,
                 'candidat_id' => $candidat->id,
@@ -128,7 +138,7 @@ class CandidatController extends Controller
      *   "body": {
      *     "id": 1,
      *     "name": "John Doe",
-     *     "npi": "123456789",
+     *     "npi": 123456789,
      *     "election_id": 1,
      *     "photo": "candidats/photos/johndoe.jpg"
      *   }
@@ -145,6 +155,9 @@ class CandidatController extends Controller
         if ($candidat == null) {
             return ResponseApiController::apiResponse(false, "Candidat introuvable", $candidat, 404);
         }
+        $candidat->photo = $candidat->photo
+            ? asset('storage/' . $candidat->photo)
+            : null;
         return ResponseApiController::apiResponse(true, "", $candidat);
     }
 
@@ -167,7 +180,7 @@ class CandidatController extends Controller
      *     "id": 1,
      *     "name": "John Doe",
      *     "description": "Une bonne description",
-     *     "npi": "123456789",
+     *     "npi": 123456789,
      *     "election_id": 1,
      *     "photo": "candidats/photos/johndoe_updated.jpg"
      *   }

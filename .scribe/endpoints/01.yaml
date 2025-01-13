@@ -48,7 +48,7 @@ endpoints:
         name: password
         description: 'The password for the new account. Minimum length: 8 characters.'
         required: true
-        example: '^)mfH0Q{'
+        example: '>qxrV0#K7F]Y&xmfy'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -57,7 +57,7 @@ endpoints:
     cleanBodyParameters:
       npi: 123456789
       email: user@example.com
-      password: '^)mfH0Q{'
+      password: '>qxrV0#K7F]Y&xmfy'
     fileParameters: []
     responses:
       -
@@ -134,7 +134,7 @@ endpoints:
         name: password
         description: 'The password of the user.'
         required: true
-        example: ')x/k2f)/9*\m{'
+        example: 'yKzwsG1r!A*72hf[m'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -142,7 +142,7 @@ endpoints:
         custom: []
     cleanBodyParameters:
       email: user@example.com
-      password: ')x/k2f)/9*\m{'
+      password: 'yKzwsG1r!A*72hf[m'
     fileParameters: []
     responses:
       -
@@ -151,7 +151,11 @@ endpoints:
           {
             "success": true,
             "message": "Connexion réussie",
-            "body": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+            "body": {
+               "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9",
+               "role": "admin",
+               "npi": 1952368744,
+            }
           }
         headers: []
         description: ''
@@ -312,7 +316,7 @@ endpoints:
         name: otp
         description: ''
         required: true
-        example: deserunt
+        example: magni
         type: numeric
         enumValues: []
         exampleWasSpecified: false
@@ -322,7 +326,7 @@ endpoints:
         name: password
         description: 'minimum six characters'
         required: true
-        example: 's@D|\*:}6SSu,xTC@'
+        example: 'c.wDf}]Kg(Ye4rl'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -332,7 +336,7 @@ endpoints:
         name: password_confirmation
         description: 'equal to password'
         required: true
-        example: consequuntur
+        example: repellendus
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -340,9 +344,9 @@ endpoints:
         custom: []
     cleanBodyParameters:
       email: user@example.com
-      otp: deserunt
-      password: 's@D|\*:}6SSu,xTC@'
-      password_confirmation: consequuntur
+      otp: magni
+      password: 'c.wDf}]Kg(Ye4rl'
+      password_confirmation: repellendus
     fileParameters: []
     responses:
       -

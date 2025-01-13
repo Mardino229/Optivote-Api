@@ -48,7 +48,7 @@ endpoints:
               {
                 "id": 1,
                 "name": "John Doe",
-                "npi": "123456789",
+                "npi": 123456789,
                 "election_id": 1,
                 "description": "Une description du candidat",
                 "photo": "candidats/photos/johndoe.jpg"
@@ -119,7 +119,7 @@ endpoints:
             "body": {
               "id": 1,
               "name": "John Doe",
-              "npi": "123456789",
+              "npi": 123456789,
               "election_id": 1,
               "photo": "candidats/photos/johndoe.jpg"
             }
@@ -255,7 +255,7 @@ endpoints:
               "id": 1,
               "name": "John Doe",
               "description": "Une bonne description",
-              "npi": "123456789",
+              "npi": 123456789,
               "election_id": 1,
               "photo": "candidats/photos/johndoe_updated.jpg"
             }
@@ -402,7 +402,7 @@ endpoints:
               "id": 1,
               "name": "John Doe",
               "description": "Une bonne description",
-              "npi": "123456789",
+              "npi": 123456789,
               "election_id": 1,
               "photo": "candidats/photos/johndoe.jpg"
             }

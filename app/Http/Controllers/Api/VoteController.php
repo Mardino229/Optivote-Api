@@ -82,10 +82,10 @@ class VoteController extends Controller
         if (UtilsController::between($election->start_date, $election->end_date)) {
             $vote = Vote::create($request->validated());
             ResultatController::add($election->id, $request->candidat_id);
-            return ResponseApiController::apiResponse(true, "Vote enregistré avec succès", $vote, 201);
+            return ResponseApiController::apiResponse(true, "Vote enregistré avec succès", [], 201);
         }
 
-        return ResponseApiController::apiResponse(false, "Vous n'êtes pas autorisé à voter en cette période", null, 406);
+        return ResponseApiController::apiResponse(false, "Vous n'êtes pas autorisé à voter en cette période", [], 406);
     }
 
     /**
