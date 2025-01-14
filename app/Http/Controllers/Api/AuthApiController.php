@@ -46,7 +46,7 @@ class AuthApiController extends Controller
     {
         $request->validate([
             "email" => "required|email",
-            "npi" => "required|integer",
+            "npi" => "required|integer|exists:persons,npi",
             "password" => "required|min:8",
         ]);
 
@@ -95,6 +95,7 @@ class AuthApiController extends Controller
      *   "message": "Connexion réussie",
      *   "body": {
      *      "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9",
+     *      "id": 2,
      *      "role": "admin",
      *      "npi": 1952368744,
      *   }
@@ -117,6 +118,7 @@ class AuthApiController extends Controller
             $token = $user->createToken($request->email);
             return ResponseApiController::apiResponse(true, 'Connexion réussie', [
                 'accessToken' => $token->plainTextToken,
+                'id' => $user->id,
                 'role' => $user->roles[0]->name,
                 'npi' => $user->npi,
             ]);
