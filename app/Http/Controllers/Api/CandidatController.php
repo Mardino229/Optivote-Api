@@ -140,7 +140,7 @@ class CandidatController extends Controller
      *     "name": "John Doe",
      *     "npi": 123456789,
      *     "election_id": 1,
-     *     "photo": "candidats/photos/johndoe.jpg"
+     *     "photo": "https://optivote.mardino.tech/storage/candidats/photos/johndoe.jpg"
      *   }
      * }
      * @response 404 {
@@ -182,7 +182,7 @@ class CandidatController extends Controller
      *     "description": "Une bonne description",
      *     "npi": 123456789,
      *     "election_id": 1,
-     *     "photo": "candidats/photos/johndoe_updated.jpg"
+     *     "photo": "https://optivote.mardino.tech/storages/candidats/photos/johndoe_updated.jpg"
      *   }
      * }
      * @response 406 {
