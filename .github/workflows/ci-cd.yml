@@ -32,6 +32,6 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         script: |
           cd ~/Optivote-Api
-#          cp .env.example .env
+          # cp .env.example .env
           chmod +x run.sh
           ./run.sh
