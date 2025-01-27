@@ -45,7 +45,7 @@ class AuthApiController extends Controller
     public function create(Request $request)
     {
         $request->validate([
-            "email" => "required|email",
+            "email" => "required|email|unique:users,email",
             "npi" => "required|integer|exists:persons,npi",
             "password" => "required|min:8",
         ]);
