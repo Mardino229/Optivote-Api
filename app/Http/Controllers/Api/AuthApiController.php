@@ -144,9 +144,12 @@ class AuthApiController extends Controller
     {
         Auth::logout();
         $user = User::where('npi', $request->npi)->first();
-        $user->tokens()->delete();
+        if ($user!=null) {
+            $user->tokens()->delete();
+            return ResponseApiController::apiResponse(true, 'Déconnexion réussie', '', 201);
+        }
 
-        return ResponseApiController::apiResponse(true, 'Déconnexion réussie', '', 201);
+        return ResponseApiController::apiResponse(true, 'Déconnexion échoué. Utilisateur non trouvé', '', 201);
     }
 
     /**

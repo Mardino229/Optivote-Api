@@ -142,7 +142,6 @@ class ElectionController extends Controller
      */
     public function store(ElectionRequest $request)
     {
-
         $election = Election::create($request->all());
         return ResponseApiController::apiResponse(true, 'Election created successfully', $election, 201);
     }
