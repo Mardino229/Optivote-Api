@@ -134,9 +134,14 @@ class AuthApiController extends Controller
      *
      * @group Authentication
      * @bodyParam npi integer required The NPI of the user. Example: 115586654
-     * @response 201 {
+     * @response 200 {
      *   "success": true,
      *   "message": "Déconnexion réussie",
+     *   "body": ""
+     * }
+     * @response 200 {
+     *   "success": false,
+     *   "message": "Déconnexion échoué. Utilisateur non trouvé",
      *   "body": ""
      * }
      */
@@ -146,10 +151,9 @@ class AuthApiController extends Controller
         $user = User::where('npi', $request->npi)->first();
         if ($user!=null) {
             $user->tokens()->delete();
-            return ResponseApiController::apiResponse(true, 'Déconnexion réussie', '', 201);
+            return ResponseApiController::apiResponse(true, 'Déconnexion réussie', '');
         }
-
-        return ResponseApiController::apiResponse(true, 'Déconnexion échoué. Utilisateur non trouvé', '', 201);
+        return ResponseApiController::apiResponse(false, 'Déconnexion échoué. Utilisateur non trouvé', '');
     }
 
     /**
