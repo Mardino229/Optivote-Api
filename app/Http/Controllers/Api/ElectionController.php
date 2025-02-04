@@ -45,12 +45,12 @@ class ElectionController extends Controller
      * Retrieving election details This route allows you to retrieve the details of an election, including the leading candidates and the time remaining.
      *
      *
-     * @urlParam id int Requis. L'identifiant de l'élection.
+     * @urlParam id int Required. id of Election.
      *
      * @response 200 {
      *   "success": true,
      *   "message": "",
-     *   "data": {
+     *   "body": {
      *     "delay": "02:15:30:10",
      *     "nbr_vote": 1500,
      *     "lead": [
@@ -63,7 +63,7 @@ class ElectionController extends Controller
      * @response 404 {
      *   "success": false,
      *   "message": "Election introuvable",
-     *   "data": null
+     *   "body": null
      * }
      */
     public function detail($id) {
