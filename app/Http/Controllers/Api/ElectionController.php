@@ -222,7 +222,13 @@ class ElectionController extends Controller
      * @response 201 {
      *   "success": true,
      *   "message": "Election du deuxième tour crée avec succès",
-     *   "body": []
+     *   "body": {
+     *      "id": 1,
+     *      "name": "Presidential Election Second Tour",
+     *      "start_date": "2025-01-01",
+     *      "end_date": "2025-01-10",
+     *      "status": true
+     *    }
      * }
      * @response 400 {
      *   "success": false,
@@ -270,7 +276,7 @@ class ElectionController extends Controller
             }
         }
         if ($second) {
-            $second = Election::create([
+            $seconde = Election::create([
                 "name" => $election->name . " 2ème tour",
                 "start_date" => $request->start_date,
                 "end_date" => $request->end_date,
@@ -285,17 +291,17 @@ class ElectionController extends Controller
                 $candidate = Candidat::find($resultat->candidat_id);
                 $second_candidate = Candidat::create([
                     'npi' => $candidate->npi,
-                    'election_id' => $second->id,
+                    'election_id' => $seconde->id,
                     'description' => $candidate->description,
                     'photo' => $candidate->photo,
                 ]);
                 Resultat::create([
-                    'election_id' => $second->id,
+                    'election_id' => $seconde->id,
                     'candidat_id' => $second_candidate->id,
                 ]);
             }
 
-            return ResponseApiController::apiResponse(true, "Election du deuxième tour crée avec succès", [], 201);
+            return ResponseApiController::apiResponse(true, "Election du deuxième tour crée avec succès", $seconde, 201);
         }
         return ResponseApiController::apiResponse(false, "Vous ne pouvez pas créer de second tour pour cette élection", [], 400);
     }
