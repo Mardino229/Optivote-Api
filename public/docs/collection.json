@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Optivote",
-        "_postman_id": "a2dcbf09-7cc6-4352-b598-b813434d586b",
+        "_postman_id": "b0345262-e738-4a67-a4a1-2f2d97863b9a",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -41,7 +41,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"npi\":123456789,\"email\":\"user@example.com\",\"password\":\">qxrV0#K7F]Y&xmfy\"}"
+                            "raw": "{\"email\":\"user@example.com\",\"npi\":123456789,\"password\":\"#7u5v1=e'IY$u[aU3\"}"
                         },
                         "description": "This endpoint allows users to create a new account.\nThe user must provide their NPI, email, and password.",
                         "auth": {
@@ -91,7 +91,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"email\":\"user@example.com\",\"password\":\"yKzwsG1r!A*72hf[m\"}"
+                            "raw": "{\"email\":\"user@example.com\",\"password\":\"68CvE-\\\/|\"}"
                         },
                         "description": "This endpoint allows a user to log in with their email and password.",
                         "auth": {
@@ -102,7 +102,7 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\n  \"success\": true,\n  \"message\": \"Connexion r\u00e9ussie\",\n  \"body\": {\n     \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9\",\n     \"role\": \"admin\",\n     \"npi\": 1952368744,\n  }\n}",
+                            "body": "{\n  \"success\": true,\n  \"message\": \"Connexion r\u00e9ussie\",\n  \"body\": {\n     \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9\",\n     \"id\": 2,\n     \"role\": \"admin\",\n     \"npi\": 1952368744,\n  }\n}",
                             "name": ""
                         },
                         {
@@ -145,8 +145,14 @@
                     "response": [
                         {
                             "header": [],
-                            "code": 201,
+                            "code": 200,
                             "body": "{\n  \"success\": true,\n  \"message\": \"D\u00e9connexion r\u00e9ussie\",\n  \"body\": \"\"\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"success\": false,\n  \"message\": \"D\u00e9connexion \u00e9chou\u00e9. Utilisateur non trouv\u00e9\",\n  \"body\": \"\"\n}",
                             "name": ""
                         }
                     ]
@@ -211,7 +217,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"email\":\"user@example.com\",\"otp\":\"magni\",\"password\":\"c.wDf}]Kg(Ye4rl\",\"password_confirmation\":\"repellendus\"}"
+                            "raw": "{\"email\":\"user@example.com\",\"otp\":\"aliquam\",\"password\":\"m@NL71$l7\\\"o2[E\",\"password_confirmation\":\"molestiae\"}"
                         },
                         "description": "This endpoint reset user password.",
                         "auth": {
@@ -332,7 +338,7 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\n  \"success\": true,\n  \"message\": \"\",\n  \"body\": {\n    \"id\": 1,\n    \"name\": \"John Doe\",\n    \"npi\": 123456789,\n    \"election_id\": 1,\n    \"photo\": \"candidats\/photos\/johndoe.jpg\"\n  }\n}",
+                            "body": "{\n  \"success\": true,\n  \"message\": \"\",\n  \"body\": {\n    \"id\": 1,\n    \"name\": \"John Doe\",\n    \"npi\": 123456789,\n    \"election_id\": 1,\n    \"photo\": \"https:\/\/optivote.mardino.tech\/storage\/candidats\/photos\/johndoe.jpg\"\n  }\n}",
                             "name": ""
                         },
                         {
@@ -419,7 +425,7 @@
                         {
                             "header": [],
                             "code": 200,
-                            "body": "{\n  \"success\": true,\n  \"message\": \"Candidat mis \u00e0 jour avec succ\u00e8s\",\n  \"body\": {\n    \"id\": 1,\n    \"name\": \"John Doe\",\n    \"description\": \"Une bonne description\",\n    \"npi\": 123456789,\n    \"election_id\": 1,\n    \"photo\": \"candidats\/photos\/johndoe_updated.jpg\"\n  }\n}",
+                            "body": "{\n  \"success\": true,\n  \"message\": \"Candidat mis \u00e0 jour avec succ\u00e8s\",\n  \"body\": {\n    \"id\": 1,\n    \"name\": \"John Doe\",\n    \"description\": \"Une bonne description\",\n    \"npi\": 123456789,\n    \"election_id\": 1,\n    \"photo\": \"https:\/\/optivote.mardino.tech\/storages\/candidats\/photos\/johndoe_updated.jpg\"\n  }\n}",
                             "name": ""
                         },
                         {
@@ -923,6 +929,55 @@
                     ]
                 },
                 {
+                    "name": "R\u00e9cup\u00e9rer les d\u00e9tails d'une \u00e9lection\n\nCette route permet de r\u00e9cup\u00e9rer les d\u00e9tails d'une \u00e9lection, y compris les candidats en t\u00eate et le temps restant.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/election\/detail\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/election\/detail\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "15",
+                                    "description": "Requis. L'identifiant de l'\u00e9lection."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"success\": true,\n  \"message\": \"\",\n  \"data\": {\n    \"delay\": \"02:15:30:10\",\n    \"nbr_vote\": 1500,\n    \"lead\": [\n      \"Candidat 1\",\n      \"Candidat 2\"\n    ]\n  }\n}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n  \"success\": false,\n  \"message\": \"Election introuvable\",\n  \"data\": null\n}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
                     "name": "Create a second round of an election.",
                     "request": {
                         "url": {
@@ -934,7 +989,7 @@
                                 {
                                     "id": "election_id",
                                     "key": "election_id",
-                                    "value": "adipisci",
+                                    "value": "ut",
                                     "description": "The ID of the election."
                                 },
                                 {
@@ -958,7 +1013,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"start_date\":\"2025-01-13T16:35:51\",\"end_date\":\"2054-11-04\",\"required\":\"2024-01-10\"}"
+                            "raw": "{\"start_date\":\"2025-02-04T19:15:38\",\"end_date\":\"2059-07-20\",\"required\":\"2024-01-10\"}"
                         },
                         "description": "",
                         "auth": {
@@ -1070,7 +1125,7 @@
                                 {
                                     "id": "election_id",
                                     "key": "election_id",
-                                    "value": "7",
+                                    "value": "12",
                                     "description": "L'ID de l'\u00e9lection dont on veut les r\u00e9sultats. Exemple : 1"
                                 }
                             ]
@@ -1233,7 +1288,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\"user_id\":6,\"candidat_id\":5,\"election_id\":3,\"voter_id\":2}"
+                            "raw": "{\"user_id\":14,\"candidat_id\":5,\"election_id\":3,\"voter_id\":2}"
                         },
                         "description": "",
                         "auth": {

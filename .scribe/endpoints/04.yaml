@@ -161,7 +161,7 @@ endpoints:
         name: user_id
         description: 'The <code>id</code> of an existing record in the users table.'
         required: true
-        example: 6
+        example: 14
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -198,7 +198,7 @@ endpoints:
         nullable: false
         custom: []
     cleanBodyParameters:
-      user_id: 6
+      user_id: 14
       candidat_id: 5
       election_id: 3
       voter_id: 2

@@ -40,6 +40,72 @@ class ElectionController extends Controller
     }
 
     /**
+     * @group Elections
+     *
+     * Retrieving election details This route allows you to retrieve the details of an election, including the leading candidates and the time remaining.
+     *
+     *
+     * @urlParam id int Requis. L'identifiant de l'élection.
+     *
+     * @response 200 {
+     *   "success": true,
+     *   "message": "",
+     *   "data": {
+     *     "delay": "02:15:30:10",
+     *     "nbr_vote": 1500,
+     *     "lead": [
+     *       "Candidat 1",
+     *       "Candidat 2"
+     *     ]
+     *   }
+     * }
+     *
+     * @response 404 {
+     *   "success": false,
+     *   "message": "Election introuvable",
+     *   "data": null
+     * }
+     */
+    public function detail($id) {
+        $election = Election::find($id);
+        if ($election ==  null) {
+            return ResponseApiController::apiResponse(false, "Election introuvable", $election , 404);
+        }
+
+        $resultats = Resultat::all()->where('election_id', $id);
+        $total = 0;
+        foreach ($resultats as $resultat) {
+            $total += $resultat->nbr_vote;
+        }
+
+       if (UtilsController::before($election->start_date)){
+           $candidats = Candidat::where('election_id', $id)
+               ->orderBy('name', 'asc')
+               ->take(2)
+               ->pluck('name');
+           $delay = UtilsController::calculerDuree($election->start_date);
+           $details = new ElectionDetails($delay, $total, $candidats);
+           return ResponseApiController::apiResponse(true, '', $details);
+       }
+
+        $candidats = Candidat::where('election_id', $id)
+            ->orderBy('percentage', 'desc')
+            ->take(2)
+            ->pluck('name');
+
+       if (UtilsController::between($election->start_date, $election->end_date)){
+           $delay = UtilsController::calculerDuree($election->end_date);
+           $details = new ElectionDetails($delay, $total, $candidats);
+           return ResponseApiController::apiResponse(true, '', $details);
+       }
+
+        $delay = "00:00:00:00";
+        $details = new ElectionDetails($delay, $total, $candidats);
+
+        return ResponseApiController::apiResponse(true, '', $details);
+    }
+
+    /**
      * Retrieve elections currently in progress.
      *
      * @group Elections
@@ -326,5 +392,20 @@ class ElectionController extends Controller
         }
         $election->delete();
         return ResponseApiController::apiResponse(true, 'Election supprimé avec succès');
+    }
+}
+
+
+class ElectionDetails
+{
+    public $delay;
+    public $nbr_vote;
+    public $lead;
+
+    public function __construct($delay, $nbr_vote, $lead)
+    {
+        $this->delay = $delay;
+        $this->nbr_vote = $nbr_vote;
+        $this->lead = $lead;
     }
 }

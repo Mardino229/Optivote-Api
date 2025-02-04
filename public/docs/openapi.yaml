@@ -83,24 +83,24 @@ paths:
             schema:
               type: object
               properties:
-                npi:
-                  type: integer
-                  description: 'The unique NPI identifier of the person.'
-                  example: 123456789
-                  nullable: false
                 email:
                   type: string
                   description: 'The email address of the user.'
                   example: user@example.com
                   nullable: false
+                npi:
+                  type: integer
+                  description: 'The unique NPI identifier of the person.'
+                  example: 123456789
+                  nullable: false
                 password:
                   type: string
                   description: 'The password for the new account. Minimum length: 8 characters.'
-                  example: '>qxrV0#K7F]Y&xmfy'
+                  example: "#7u5v1=e'IY$u[aU3"
                   nullable: false
               required:
-                - npi
                 - email
+                - npi
                 - password
       security: []
   /api/login:
@@ -116,7 +116,7 @@ paths:
             text/plain:
               schema:
                 type: string
-                example: "{\n  \"success\": true,\n  \"message\": \"Connexion réussie\",\n  \"body\": {\n     \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9\",\n     \"role\": \"admin\",\n     \"npi\": 1952368744,\n  }\n}"
+                example: "{\n  \"success\": true,\n  \"message\": \"Connexion réussie\",\n  \"body\": {\n     \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9\",\n     \"id\": 2,\n     \"role\": \"admin\",\n     \"npi\": 1952368744,\n  }\n}"
         401:
           description: ''
           content:
@@ -154,7 +154,7 @@ paths:
                 password:
                   type: string
                   description: 'The password of the user.'
-                  example: 'yKzwsG1r!A*72hf[m'
+                  example: 68CvE-/|
                   nullable: false
               required:
                 - email
@@ -167,26 +167,46 @@ paths:
       description: 'This endpoint logs out the authenticated user and deletes their tokens.'
       parameters: []
       responses:
-        201:
+        200:
           description: ''
           content:
             application/json:
               schema:
-                type: object
-                example:
-                  success: true
-                  message: 'Déconnexion réussie'
-                  body: ''
-                properties:
-                  success:
-                    type: boolean
-                    example: true
-                  message:
-                    type: string
-                    example: 'Déconnexion réussie'
-                  body:
-                    type: string
-                    example: ''
+                oneOf:
+                  -
+                    description: ''
+                    type: object
+                    example:
+                      success: true
+                      message: 'Déconnexion réussie'
+                      body: ''
+                    properties:
+                      success:
+                        type: boolean
+                        example: true
+                      message:
+                        type: string
+                        example: 'Déconnexion réussie'
+                      body:
+                        type: string
+                        example: ''
+                  -
+                    description: ''
+                    type: object
+                    example:
+                      success: false
+                      message: 'Déconnexion échoué. Utilisateur non trouvé'
+                      body: ''
+                    properties:
+                      success:
+                        type: boolean
+                        example: false
+                      message:
+                        type: string
+                        example: 'Déconnexion échoué. Utilisateur non trouvé'
+                      body:
+                        type: string
+                        example: ''
       tags:
         - Authentication
       requestBody:
@@ -332,17 +352,17 @@ paths:
                 otp:
                   type: numeric
                   description: ''
-                  example: magni
+                  example: aliquam
                   nullable: false
                 password:
                   type: string
                   description: 'minimum six characters'
-                  example: 'c.wDf}]Kg(Ye4rl'
+                  example: 'm@NL71$l7"o2[E'
                   nullable: false
                 password_confirmation:
                   type: string
                   description: 'equal to password'
-                  example: repellendus
+                  example: molestiae
                   nullable: false
               required:
                 - email
@@ -465,7 +485,7 @@ paths:
                     name: 'John Doe'
                     npi: 123456789
                     election_id: 1
-                    photo: candidats/photos/johndoe.jpg
+                    photo: 'https://optivote.mardino.tech/storage/candidats/photos/johndoe.jpg'
                 properties:
                   success:
                     type: boolean
@@ -490,7 +510,7 @@ paths:
                         example: 1
                       photo:
                         type: string
-                        example: candidats/photos/johndoe.jpg
+                        example: 'https://optivote.mardino.tech/storage/candidats/photos/johndoe.jpg'
         404:
           description: ''
           content:
@@ -535,7 +555,7 @@ paths:
                     description: 'Une bonne description'
                     npi: 123456789
                     election_id: 1
-                    photo: candidats/photos/johndoe_updated.jpg
+                    photo: 'https://optivote.mardino.tech/storages/candidats/photos/johndoe_updated.jpg'
                 properties:
                   success:
                     type: boolean
@@ -563,7 +583,7 @@ paths:
                         example: 1
                       photo:
                         type: string
-                        example: candidats/photos/johndoe_updated.jpg
+                        example: 'https://optivote.mardino.tech/storages/candidats/photos/johndoe_updated.jpg'
         404:
           description: ''
           content:
@@ -1383,6 +1403,89 @@ paths:
       tags:
         - Elections
       security: []
+  '/api/election/detail/{id}':
+    get:
+      summary: "Récupérer les détails d'une élection\n\nCette route permet de récupérer les détails d'une élection, y compris les candidats en tête et le temps restant."
+      operationId: rcuprerLesDtailsDunelectionCetteRoutePermetDeRcuprerLesDtailsDunelectionYComprisLesCandidatsEnTteEtLeTempsRestant
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: true
+                  message: ''
+                  data:
+                    delay: '02:15:30:10'
+                    nbr_vote: 1500
+                    lead:
+                      - 'Candidat 1'
+                      - 'Candidat 2'
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: ''
+                  data:
+                    type: object
+                    properties:
+                      delay:
+                        type: string
+                        example: '02:15:30:10'
+                      nbr_vote:
+                        type: integer
+                        example: 1500
+                      lead:
+                        type: array
+                        example:
+                          - 'Candidat 1'
+                          - 'Candidat 2'
+                        items:
+                          type: string
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  success: false
+                  message: 'Election introuvable'
+                  data: null
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: 'Election introuvable'
+                  data:
+                    type: string
+                    example: null
+      tags:
+        - Elections
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: "Optional parameter. Requis. L'identifiant de l'élection."
+        required: true
+        schema:
+          type: integer
+        examples:
+          omitted:
+            summary: 'When the value is omitted'
+            value: ''
+          present:
+            summary: 'When the value is present'
+            value: 15
   '/api/second_tour/{election_id}':
     post:
       summary: 'Create a second round of an election.'
@@ -1502,12 +1605,12 @@ paths:
                 start_date:
                   type: string
                   description: 'Must be a valid date.'
-                  example: '2025-01-13T16:35:51'
+                  example: '2025-02-04T19:15:38'
                   nullable: false
                 end_date:
                   type: string
                   description: 'Must be a valid date. Must be a date after or equal to <code>start_date</code>.'
-                  example: '2054-11-04'
+                  example: '2059-07-20'
                   nullable: false
                 required:
                   type: end_date
@@ -1523,7 +1626,7 @@ paths:
         in: path
         name: election_id
         description: 'The ID of the election.'
-        example: adipisci
+        example: ut
         required: true
         schema:
           type: string
@@ -1642,7 +1745,7 @@ paths:
         in: path
         name: election_id
         description: "L'ID de l'élection dont on veut les résultats. Exemple : 1"
-        example: 7
+        example: 12
         required: true
         schema:
           type: integer
@@ -1890,7 +1993,7 @@ paths:
                 user_id:
                   type: integer
                   description: 'The <code>id</code> of an existing record in the users table.'
-                  example: 6
+                  example: 14
                   nullable: false
                 candidat_id:
                   type: integer

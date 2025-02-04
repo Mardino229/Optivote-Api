@@ -526,6 +526,79 @@ endpoints:
     custom: []
   -
     httpMethods:
+      - GET
+    uri: 'api/election/detail/{id}'
+    metadata:
+      groupName: Elections
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Récupérer les détails d'une élection
+
+        Cette route permet de récupérer les détails d'une élection, y compris les candidats en tête et le temps restant.
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: "Requis. L'identifiant de l'élection."
+        required: false
+        example: 15
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: 15
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "message": "",
+            "data": {
+              "delay": "02:15:30:10",
+              "nbr_vote": 1500,
+              "lead": [
+                "Candidat 1",
+                "Candidat 2"
+              ]
+            }
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: |-
+          {
+            "success": false,
+            "message": "Election introuvable",
+            "data": null
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
       - POST
     uri: 'api/second_tour/{election_id}'
     metadata:
@@ -545,7 +618,7 @@ endpoints:
         name: election_id
         description: 'The ID of the election.'
         required: true
-        example: adipisci
+        example: ut
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -562,7 +635,7 @@ endpoints:
         nullable: false
         custom: []
     cleanUrlParameters:
-      election_id: adipisci
+      election_id: ut
       id: 1
     queryParameters: []
     cleanQueryParameters: []
@@ -571,7 +644,7 @@ endpoints:
         name: start_date
         description: 'Must be a valid date.'
         required: true
-        example: '2025-01-13T16:35:51'
+        example: '2025-02-04T19:15:38'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -581,7 +654,7 @@ endpoints:
         name: end_date
         description: 'Must be a valid date. Must be a date after or equal to <code>start_date</code>.'
         required: true
-        example: '2054-11-04'
+        example: '2059-07-20'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -598,8 +671,8 @@ endpoints:
         nullable: false
         custom: []
     cleanBodyParameters:
-      start_date: '2025-01-13T16:35:51'
-      end_date: '2054-11-04'
+      start_date: '2025-02-04T19:15:38'
+      end_date: '2059-07-20'
       required: '2024-01-10'
     fileParameters: []
     responses:

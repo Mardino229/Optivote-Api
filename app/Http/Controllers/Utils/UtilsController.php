@@ -9,6 +9,18 @@ use Illuminate\Http\Request;
 class UtilsController extends Controller
 {
 
+    public static function calculerDuree($date)
+    {
+        $today = Carbon::today();
+        $date2 = Carbon::parse($date);
+
+        $diff = $today->diff($date2);
+
+        $resultat = "{$diff->d}:{$diff->h}:{$diff->i}:{$diff->s}";
+
+        return $resultat;
+    }
+
     public static function before ($date) {
         $today = Carbon::today();
         $date = Carbon::parse($date);

@@ -24,16 +24,6 @@ endpoints:
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      npi:
-        name: npi
-        description: 'The unique NPI identifier of the person.'
-        required: true
-        example: 123456789
-        type: integer
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
       email:
         name: email
         description: 'The email address of the user.'
@@ -44,20 +34,30 @@ endpoints:
         exampleWasSpecified: true
         nullable: false
         custom: []
+      npi:
+        name: npi
+        description: 'The unique NPI identifier of the person.'
+        required: true
+        example: 123456789
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
       password:
         name: password
         description: 'The password for the new account. Minimum length: 8 characters.'
         required: true
-        example: '>qxrV0#K7F]Y&xmfy'
+        example: "#7u5v1=e'IY$u[aU3"
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         custom: []
     cleanBodyParameters:
-      npi: 123456789
       email: user@example.com
-      password: '>qxrV0#K7F]Y&xmfy'
+      npi: 123456789
+      password: "#7u5v1=e'IY$u[aU3"
     fileParameters: []
     responses:
       -
@@ -134,7 +134,7 @@ endpoints:
         name: password
         description: 'The password of the user.'
         required: true
-        example: 'yKzwsG1r!A*72hf[m'
+        example: 68CvE-/|
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -142,7 +142,7 @@ endpoints:
         custom: []
     cleanBodyParameters:
       email: user@example.com
-      password: 'yKzwsG1r!A*72hf[m'
+      password: 68CvE-/|
     fileParameters: []
     responses:
       -
@@ -153,6 +153,7 @@ endpoints:
             "message": "Connexion réussie",
             "body": {
                "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9",
+               "id": 2,
                "role": "admin",
                "npi": 1952368744,
             }
@@ -213,11 +214,22 @@ endpoints:
     fileParameters: []
     responses:
       -
-        status: 201
+        status: 200
         content: |-
           {
             "success": true,
             "message": "Déconnexion réussie",
+            "body": ""
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 200
+        content: |-
+          {
+            "success": false,
+            "message": "Déconnexion échoué. Utilisateur non trouvé",
             "body": ""
           }
         headers: []
@@ -316,7 +328,7 @@ endpoints:
         name: otp
         description: ''
         required: true
-        example: magni
+        example: aliquam
         type: numeric
         enumValues: []
         exampleWasSpecified: false
@@ -326,7 +338,7 @@ endpoints:
         name: password
         description: 'minimum six characters'
         required: true
-        example: 'c.wDf}]Kg(Ye4rl'
+        example: 'm@NL71$l7"o2[E'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -336,7 +348,7 @@ endpoints:
         name: password_confirmation
         description: 'equal to password'
         required: true
-        example: repellendus
+        example: molestiae
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -344,9 +356,9 @@ endpoints:
         custom: []
     cleanBodyParameters:
       email: user@example.com
-      otp: magni
-      password: 'c.wDf}]Kg(Ye4rl'
-      password_confirmation: repellendus
+      otp: aliquam
+      password: 'm@NL71$l7"o2[E'
+      password_confirmation: molestiae
     fileParameters: []
     responses:
       -
