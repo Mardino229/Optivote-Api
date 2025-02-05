@@ -34,46 +34,50 @@ class ResultatController extends Controller
     }
 
     /**
-     * Affiche les résultats d'une élection et met à jour son statut si un candidat dépasse 50 % des votes.
-     *
-     * Cette méthode récupère les résultats d'une élection en fonction de l'ID fourni.
-     * Si un des candidats a un pourcentage supérieur à 50 %, le statut de l'élection est mis à jour à "true".
-     *
      * @group Resultat
      *
-     * @urlParam election_id integer required L'ID de l'élection dont on veut les résultats. Exemple : 1
+     * Liste des résultats d'une élection
+     *
+     * Cette route retourne les résultats d'une élection donnée avec les informations des candidats.
+     * Si un candidat dépasse 50% des votes, le statut de l'élection est mis à jour.
+     *
+     * @urlParam election_id integer required L'ID de l'élection pour laquelle récupérer les résultats. Exemple: 1
      *
      * @response 200 {
-     *    "success": true,
-     *    "message": "",
-     *    "data": [
-     *        [
-     *            {
-     *                "id": 1,
-     *                "election_id": 1,
-     *                "candidat_id": 2,
-     *                "votes": 100,
-     *                "percentage": 60
-     *            },
-     *            {
-     *                "id": 2,
-     *                "election_id": 1,
-     *                "candidat_id": 3,
-     *                "votes": 40,
-     *                "percentage": 40
-     *            }
-     *        ],
-     *        true
-     *    ]
+     *   "success": true,
+     *   "message": "",
+     *   "data": [
+     *     [
+     *       {
+     *         "id": 1,
+     *         "election_id": 5,
+     *         "nbr_vote": 150,
+     *         "percentage": 60.5,
+     *         "candidat": {
+     *           "id": 10,
+     *           "name": "Jean Dupont"
+     *         }
+     *       },
+     *       {
+     *         "id": 2,
+     *         "election_id": 5,
+     *         "nbr_vote": 100,
+     *         "percentage": 39.5,
+     *         "candidat": {
+     *           "id": 12,
+     *           "name": "Marie Curie"
+     *         }
+     *       }
+     *     ],
+     *     true
+     *   ]
      * }
      *
      * @response 404 {
-     *    "success": false,
-     *    "message": "Election introuvable",
-     *    "data": null
+     *   "success": false,
+     *   "message": "Election introuvable",
+     *   "data": null
      * }
-     *
-     * @param int $election_id L'ID de l'élection.
      */
     public function index (int $election_id)
     {
@@ -81,8 +85,8 @@ class ResultatController extends Controller
         if ($election ==  null) {
             return ResponseApiController::apiResponse(false, "Election introuvable", $election , 404);
         }
-        $resultats = Resultat::all()->where('election_id', $election_id);
-        $election = Election::find($election_id);
+        $resultats = Resultat::with('candidat')->where('election_id', $election_id)->get();
+
         foreach ($resultats as $resultat) {
             if ($resultat->percentage > 50 ) {
                 $election->status = true;

@@ -12,4 +12,9 @@ class Resultat extends Model
         'nbr_vote',
         'percentage',
     ];
+
+    public function resultat()
+    {
+        return $this->belongsTo(Candidat::class);
+    }
 }
