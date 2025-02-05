@@ -15,6 +15,12 @@ use Illuminate\Support\Facades\Validator;
 
 class ElectionController extends Controller
 {
+
+    public function dashboard(){
+        $nbr = Election::count();
+        return ResponseApiController::apiResponse(true, '', $nbr);
+}
+
     /**
      * Retrieve all elections.
      *
@@ -415,3 +421,16 @@ class ElectionDetails
         $this->lead = $lead;
     }
 }
+
+class Dashboard
+{
+    public $nbr_elections;
+    public $nbr_votants;
+
+    public function __construct($nbr_elections, $nbr_votants)
+    {
+        $this->nbr_elections = $nbr_elections;
+        $this->nbr_votants = $nbr_votants;
+    }
+}
+
