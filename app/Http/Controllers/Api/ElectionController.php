@@ -42,7 +42,7 @@ class ElectionController extends Controller
      */
     public function index()
     {
-        $elections = Election::all();
+        $elections = Election::orderBy('created_at', 'desc')->get();
         return ResponseApiController::apiResponse(true, '', $elections);
     }
 
