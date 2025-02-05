@@ -94,11 +94,13 @@ class ResultatController extends Controller
                 break;
             }
         }
-        $resultats["candidat"] = $resultats["candidat"]->map(function ($candidat) {
-            $candidat->photo = $candidat->photo
-                ? asset('storage/' . $candidat->photo)
-                : null;
-            return $candidat;
+        $resultats = $resultats->map(function ($resultat) {
+            if ($resultat->candidat) {
+                $resultat->candidat->photo = $resultat->candidat->photo
+                    ? asset('storage/' . $resultat->candidat->photo)
+                    : null;
+            }
+            return $resultat;
         });
 //        return ResponseApiController::apiResponse(true, "", [$resultats, $election->status]);
         return ResponseApiController::apiResponse(true, "", $resultats);
