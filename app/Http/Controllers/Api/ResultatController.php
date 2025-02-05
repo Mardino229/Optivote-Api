@@ -94,7 +94,8 @@ class ResultatController extends Controller
                 break;
             }
         }
-        return ResponseApiController::apiResponse(true, "", [$resultats, $election->status]);
+//        return ResponseApiController::apiResponse(true, "", [$resultats, $election->status]);
+        return ResponseApiController::apiResponse(true, "", $resultats);
     }
 
     public static function calculatePercentage (int $election_id, int $candidat_id)
