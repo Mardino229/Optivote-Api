@@ -40,7 +40,7 @@ class ElectionController extends Controller
      * }
      */
     public function index()
-    {
+    {h
         $elections = Election::all();
         return ResponseApiController::apiResponse(true, '', $elections);
     }
