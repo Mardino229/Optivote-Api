@@ -94,7 +94,7 @@ class ResultatController extends Controller
                 break;
             }
         }
-        $resultats->candidat = $resultats->candidats->map(function ($candidat) {
+        $resultats["candidat"] = $resultats["candidat"]->map(function ($candidat) {
             $candidat->photo = $candidat->photo
                 ? asset('storage/' . $candidat->photo)
                 : null;
