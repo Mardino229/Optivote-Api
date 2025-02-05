@@ -13,7 +13,7 @@ class Resultat extends Model
         'percentage',
     ];
 
-    public function resultat()
+    public function candidat()
     {
         return $this->belongsTo(Candidat::class);
     }
