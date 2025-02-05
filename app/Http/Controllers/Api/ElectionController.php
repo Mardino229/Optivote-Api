@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Validator;
 class ElectionController extends Controller
 {
 
+    /**/
     public function dashboard(){
         $nbr = Election::count();
         return ResponseApiController::apiResponse(true, '', $nbr);
@@ -40,7 +41,7 @@ class ElectionController extends Controller
      * }
      */
     public function index()
-    {h
+    {
         $elections = Election::all();
         return ResponseApiController::apiResponse(true, '', $elections);
     }
