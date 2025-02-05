@@ -26,6 +26,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::controller(ElectionController::class)->group(function(){
         Route::get('election_inprogress', 'election_inprogress');
         Route::get('election_completed', 'election_completed');
+        Route::get('dashboard', 'dashboard');
         Route::get('election_notStarted', 'election_notStarted');
         Route::get('election/detail/{id}', 'detail');
         Route::post('second_tour/{election_id}', 'second')->middleware('role:admin');
