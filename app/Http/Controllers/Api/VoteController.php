@@ -102,11 +102,11 @@ class VoteController extends Controller
      *  }
      * @response 200 {
      *     "success": true,
-     *     "message": "Vous pouvez voté",
+     *     "message": "Vous n'avez pas encore voté",
      *     "data": []
      *  }
      */
-    public function verifyVote(int $user_id, int $election_id)
+    public function verifyVote(int $election_id, int $user_id)
     {
         $vote = Vote::where("user_id", $user_id)->where("election_id", $election_id)->first();
         if ($vote ==  null) {
