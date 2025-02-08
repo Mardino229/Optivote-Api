@@ -100,7 +100,7 @@ class CandidatController extends Controller
 
         $candidatData = $request->validated();
         $election = Election::find($request->election_id);
-        if (UtilsController::before($election->start_date)) {
+//        if (UtilsController::before($election->start_date)) {
             $candidat = Candidat::where('npi', $request->npi)->where('election_id', $request->election_id)->first();
             if ($candidat != null) {
                 return ResponseApiController::apiResponse(false, 'Ce candidat est déjà inscrit à cette élection', '', 406);
@@ -122,8 +122,9 @@ class CandidatController extends Controller
             return ResponseApiController::apiResponse(true, "Candidat ajouté avec succès", $candidat, 201);
         }
 
-        return ResponseApiController::apiResponse(false, 'Vous ne pouvez plus ajouter de candidat après la date de lancement des élections', '', 406);
-    }
+//        return ResponseApiController::apiResponse(false, 'Vous ne pouvez plus ajouter de candidat après la date de lancement des élections', '', 406);
+//
+//    }
 
     /**
      * Retrieve a specific candidate.
