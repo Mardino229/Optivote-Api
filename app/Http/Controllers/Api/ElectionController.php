@@ -135,7 +135,11 @@ class ElectionController extends Controller
         $today = Carbon::today();
         $currentElections = Election::where('start_date', '<=', $today)
             ->where('end_date', '>=', $today)
-            ->get();
+            ->get()
+            ->filter(function ($election) {
+                return $election->candidates()->count() >= 2;
+            });
+
         return ResponseApiController::apiResponse(true, '', $currentElections);
     }
 
