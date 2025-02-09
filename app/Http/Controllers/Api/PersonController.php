@@ -23,7 +23,7 @@ class PersonController extends Controller
     {
         // Validation des données
         $request->validate([
-            'npi' => 'required|integer|size:10',
+            'npi' => 'required|digits:10',
             'name' => 'required|string|max:255',
             'birthday' => 'required|date',
             'number' => 'required|integer',
