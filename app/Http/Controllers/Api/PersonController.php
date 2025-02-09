@@ -9,7 +9,31 @@ use Illuminate\Http\Request;
 class PersonController extends Controller
 {
     public function index() {
-        $persons = Person::all();
+        $persons = Person::orderBy('created_at', 'desc')->get();
         return view('welcome', ['persons' => $persons]);
-}
+    }
+
+    public function create()
+    {
+        return view('create');
+    }
+
+    // Enregistrer une nouvelle personne
+    public function store(Request $request)
+    {
+        // Validation des données
+        $request->validate([
+            'npi' => 'required|integer|size:10',
+            'name' => 'required|string|max:255',
+            'birthday' => 'required|date',
+            'number' => 'required|integer',
+        ]);
+
+        // Enregistrement dans la base de données
+        Person::create($request->all());
+
+        // Redirection avec un message de succès
+        return redirect()->route('create')->with('success', 'Personne enregistrée avec succès !');
+    }
+
 }
