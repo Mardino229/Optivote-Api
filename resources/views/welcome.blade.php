@@ -17,7 +17,7 @@
                 .blue{
                     padding: 15px;
                     border-radius: 20px;
-                    background-color: #6ac174;
+                    background-color: #575fcf;
                     margin: 10px;
                 }
             </style>
