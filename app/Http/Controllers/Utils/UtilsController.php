@@ -11,14 +11,19 @@ class UtilsController extends Controller
 
     public static function calculerDuree($date)
     {
-        $today = Carbon::today();
+        $now = Carbon::now(); // Utiliser now() au lieu de today() pour avoir l'heure actuelle
         $date2 = Carbon::parse($date);
 
-        $diff = $today->diff($date2);
+        $diff = $now->diff($date2);
 
-        $resultat = "{$diff->d}:{$diff->h}:{$diff->i}:{$diff->s}";
-
-        return $resultat;
+        // Formater avec leading zeros si nécessaire
+        return sprintf(
+            "%d:%02d:%02d:%02d",
+            $diff->d,
+            $diff->h,
+            $diff->i,
+            $diff->s
+        );
     }
 
     public static function before ($date) {
