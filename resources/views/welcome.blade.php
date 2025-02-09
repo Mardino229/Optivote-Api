@@ -59,8 +59,9 @@
             }
 
             th, td {
-                padding: 12px 20px;
+                margin: 12px 20px;
                 border-bottom: 1px solid #ddd;
+                padding: 5px;
             }
 
             th {
@@ -104,7 +105,7 @@
                     </button>
                 </a>
 
-                <table>
+                <table style="overflow-x:auto;">
                     <thead>
                     <tr>
                         <th>NPI</th>
