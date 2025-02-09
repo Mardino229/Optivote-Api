@@ -116,7 +116,7 @@
                     <tbody>
                     @foreach($persons as $person)
                         <tr>
-                            <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white"># {{$person->npi}}</td>
+                            <td># {{$person->npi}}</td>
                             <td>{{$person->name}}</td>
                             <td>{{$person->birthday}}</td>
                             <td>{{$person->number}}</td>
