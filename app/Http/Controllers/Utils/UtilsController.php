@@ -18,7 +18,7 @@ class UtilsController extends Controller
 
         // Formater avec leading zeros si nécessaire
         return sprintf(
-            "%d:%02d:%02d:%02d",
+            "%dJ:%02dh:%02dm:%02ds",
             $diff->d,
             $diff->h,
             $diff->i,
