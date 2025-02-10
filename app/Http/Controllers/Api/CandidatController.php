@@ -119,7 +119,7 @@ class CandidatController extends Controller
                 'candidat_id' => $candidat->id,
             ]);
 
-            return ResponseApiController::apiResponse(true, "Candidat ajouté avec succès", $candidat, 201);
+            return ResponseApiController::apiResponse(true, "Candidats ajoutés avec succès", $candidat, 201);
         }
 
 //        return ResponseApiController::apiResponse(false, 'Vous ne pouvez plus ajouter de candidat après la date de lancement des élections', '', 406);
