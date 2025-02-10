@@ -14,16 +14,20 @@ class UtilsController extends Controller
         $now = Carbon::now(); // Utiliser now() au lieu de today() pour avoir l'heure actuelle
         $date2 = Carbon::parse($date);
 
-        $diff = $now->diff($date2);
+        if (self::before($date2)) {
 
-        // Formater avec leading zeros si nécessaire
-        return sprintf(
-            "%dJ:%02dh:%02dm:%02ds",
-            $diff->d,
-            $diff->h,
-            $diff->i,
-            $diff->s
-        );
+            $diff = $now->diff($date2);
+
+            // Formater avec leading zeros si nécessaire
+            return sprintf(
+                "%dJ:%02dh:%02dm:%02ds",
+                $diff->d,
+                $diff->h,
+                $diff->i,
+                $diff->s
+            );
+        }
+        return "00J:00h:00m:00s";
     }
 
     public static function before ($date) {
