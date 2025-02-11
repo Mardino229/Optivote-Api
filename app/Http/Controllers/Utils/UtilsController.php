@@ -9,25 +9,37 @@ use Illuminate\Http\Request;
 class UtilsController extends Controller
 {
 
+//    public static function calculerDuree($date)
+//    {
+//        $now = Carbon::now(); // Utiliser now() au lieu de today() pour avoir l'heure actuelle
+//        $date2 = Carbon::parse($date);
+//
+//        if (self::before($date2)) {
+//
+//            $diff = $now->diff($date2);
+//
+//            // Formater avec leading zeros si nécessaire
+//            return sprintf(
+//                "%dJ:%02dh:%02dm:%02ds",
+//                $diff->d,
+//                $diff->h,
+//                $diff->i,
+//                $diff->s
+//            );
+//        }
+//        return "00J:00h:00m:00s";
+//    }
+
     public static function calculerDuree($date)
     {
-        $now = Carbon::now(); // Utiliser now() au lieu de today() pour avoir l'heure actuelle
+        $now = Carbon::now();
         $date2 = Carbon::parse($date);
 
         if (self::before($date2)) {
-
-            $diff = $now->diff($date2);
-
-            // Formater avec leading zeros si nécessaire
-            return sprintf(
-                "%dJ:%02dh:%02dm:%02ds",
-                $diff->d,
-                $diff->h,
-                $diff->i,
-                $diff->s
-            );
+            return $now->diffInSeconds($date2);
         }
-        return "00J:00h:00m:00s";
+
+        return 0;
     }
 
     public static function before ($date) {

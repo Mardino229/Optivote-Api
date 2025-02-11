@@ -106,7 +106,7 @@ class ElectionController extends Controller
            return ResponseApiController::apiResponse(true, '', $details);
        }
 
-        $delay = "00:00:00:00";
+        $delay = 0;
         $details = new ElectionDetails($delay, $total, $candidats);
 
         return ResponseApiController::apiResponse(true, '', $details);
