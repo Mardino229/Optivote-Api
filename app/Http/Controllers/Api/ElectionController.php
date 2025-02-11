@@ -136,9 +136,7 @@ class ElectionController extends Controller
         $currentElections = Election::where('start_date', '<=', $today)
             ->where('end_date', '>=', $today)
             ->get()
-            ->filter(function ($election) {
-                return $election->candidats()->count() >= 2;
-            });
+            ;
 
         return ResponseApiController::apiResponse(true, '', $currentElections);
     }
