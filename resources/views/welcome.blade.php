@@ -93,39 +93,39 @@
         </style>
     </head>
     <body class="flex items-center flex-col justify-center w-screen h-screen">
-            @if (session('success'))
-        <div class="w-full bg-green-300 rounded-lg">
-            <p class="text-green-600 p-2 text-center">{{ session('success') }}</p>
-        </div>
-    @endif
-            <div class="p-8 flex items-center flex-col">
-                <a href="{{route("create")}}">
-                    <button class="m-2 bg-green-600 blue text-white bold rounded-lg">
-                            Enregistrer une nouvelle personne
-                    </button>
-                </a>
+{{--            @if (session('success'))--}}
+{{--        <div class="w-full bg-green-300 rounded-lg">--}}
+{{--            <p class="text-green-600 p-2 text-center">{{ session('success') }}</p>--}}
+{{--        </div>--}}
+{{--    @endif--}}
+{{--            <div class="p-8 flex items-center flex-col">--}}
+{{--                <a href="{{route("create")}}">--}}
+{{--                    <button class="m-2 bg-green-600 blue text-white bold rounded-lg">--}}
+{{--                            Enregistrer une nouvelle personne--}}
+{{--                    </button>--}}
+{{--                </a>--}}
 
-                <table style="overflow-x:auto;">
-                    <thead>
-                    <tr>
-                        <th>NPI</th>
-                        <th>Nom</th>
-                        <th>Birthday</th>
-                        <th>Number</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($persons as $person)
-                        <tr>
-                            <td># {{$person->npi}}</td>
-                            <td>{{$person->name}}</td>
-                            <td>{{$person->birthday}}</td>
-                            <td>{{$person->number}}</td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
-            </div>
+{{--                <table style="overflow-x:auto;">--}}
+{{--                    <thead>--}}
+{{--                    <tr>--}}
+{{--                        <th>NPI</th>--}}
+{{--                        <th>Nom</th>--}}
+{{--                        <th>Birthday</th>--}}
+{{--                        <th>Number</th>--}}
+{{--                    </tr>--}}
+{{--                    </thead>--}}
+{{--                    <tbody>--}}
+{{--                    @foreach($persons as $person)--}}
+{{--                        <tr>--}}
+{{--                            <td># {{$person->npi}}</td>--}}
+{{--                            <td>{{$person->name}}</td>--}}
+{{--                            <td>{{$person->birthday}}</td>--}}
+{{--                            <td>{{$person->number}}</td>--}}
+{{--                        </tr>--}}
+{{--                    @endforeach--}}
+{{--                    </tbody>--}}
+{{--                </table>--}}
+{{--            </div>--}}
 
 
 {{--            <table id="search-table ">--}}
