@@ -133,7 +133,7 @@ class ElectionController extends Controller
     public function election_inprogress()
     {
         $today = Carbon::today();
-        $currentElections = Election::where('start_date', '<=', $today)
+        $currentElections = Election::orderBy('created_at', 'desc')->where('start_date', '<=', $today)
             ->where('end_date', '>=', $today)
             ->get()
             ;
@@ -162,7 +162,7 @@ class ElectionController extends Controller
     public function election_completed()
     {
         $today = Carbon::today();
-        $ancientElections = Election::where('end_date', '<', $today)->get();
+        $ancientElections = Election::orderBy('created_at', 'desc')->where('end_date', '<', $today)->get();
         return ResponseApiController::apiResponse(true, '', $ancientElections);
     }
 
@@ -187,7 +187,7 @@ class ElectionController extends Controller
     public function election_notStarted()
     {
         $today = Carbon::today();
-        $newElections = Election::where('start_date', '>', $today)->get();
+        $newElections = Election::orderBy('created_at', 'desc')->where('start_date', '>', $today)->get();
         return ResponseApiController::apiResponse(true, '', $newElections);
     }
 
