@@ -217,6 +217,21 @@ class ElectionController extends Controller
      */
     public function store(ElectionRequest $request)
     {
+        $chevauchement = Election::where(function ($query) use ($request) {
+            $query->whereBetween('start_date', [$request->start_date, $request->end_date])
+                ->orWhereBetween('end_date', [$request->start_date, $request->end_date])
+                ->orWhere(function ($q) use ($request) {
+                    $q->where('start_date', '<=', $request->start_date)
+                        ->where('end_date', '>=', $request->end_date);
+                });
+        })->exists();
+
+        if ($chevauchement) {
+            return ResponseApiController::apiResponse(
+               false,
+                'Les dates sélectionnées chevauchent une autre élection.');
+        }
+
         $election = Election::create($request->all());
         return ResponseApiController::apiResponse(true, 'Election created successfully', $election, 201);
     }
