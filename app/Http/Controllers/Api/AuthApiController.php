@@ -147,13 +147,16 @@ class AuthApiController extends Controller
      */
     public function destroy(Request $request)
     {
-        Auth::logout();
-        $user = User::where('npi', $request->npi)->first();
-        if ($user!=null) {
-            $user->tokens()->delete();
-            return ResponseApiController::apiResponse(true, 'Déconnexion réussie', '');
+        $user = auth()->user(); // Récupère l'utilisateur authentifié
+
+        if (!$user) {
+            return ResponseApiController::apiResponse(false, 'Déconnexion échouée. Utilisateur non trouvé', '');
         }
-        return ResponseApiController::apiResponse(false, 'Déconnexion échoué. Utilisateur non trouvé', '');
+
+        // Supprime uniquement le token utilisé pour cette requête
+        $request->user()->currentAccessToken()->delete();
+
+        return ResponseApiController::apiResponse(true, 'Déconnexion réussie', '');
     }
 
     /**

@@ -15,7 +15,7 @@ Route::get('/user', function (Request $request) {
 Route::controller(AuthApiController::class)->group(function(){
     Route::post('register', 'create');
     Route::post('login', 'login');
-    Route::post('logout', 'destroy');
+    Route::post('logout', 'destroy')->middleware('auth:sanctum');
     Route::post('/password/send-otp', 'sendOtp');
     Route::post('/password/reset', 'resetPassword');
 });
