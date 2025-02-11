@@ -82,13 +82,13 @@
             </div>
         </form>
     </div>
-    <div class="p-4 flex gap-4 justify-between ">
-        <button class="flex w-full bag-yellow text-white justify-center px-3 py-2 rounded-md">
-            <a href="{{route("person")}}">
-                Person List
-            </a>
-        </button>
-    </div>
+{{--    <div class="p-4 flex gap-4 justify-between ">--}}
+{{--        <button class="flex w-full bag-yellow text-white justify-center px-3 py-2 rounded-md">--}}
+{{--            <a href="{{route("person")}}">--}}
+{{--                Person List--}}
+{{--            </a>--}}
+{{--        </button>--}}
+{{--    </div>--}}
 </body>
 </html>
 
