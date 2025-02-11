@@ -36,9 +36,9 @@
         </style>
 </head>
 <body class="flex items-center flex-col justify-center w-screen h-screen">
-{{--    <div>--}}
-{{--        Welcome to the jungle;--}}
-{{--    </div>--}}
+    <div>
+        Formulaire d'enregistrement
+    </div>
     <div class="mt-10 w-full p-6 sm:w-full sm:max-w-sm">
         @if (session('success'))
             <div class="w-full bg-green-300 rounded-lg">
